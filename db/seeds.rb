@@ -32,5 +32,57 @@ ApplicationRecord.transaction do
     }) 
   end
 
+
+  puts "Creating benches..."
+  # Bench 1
+  Bench.create(
+    title: "City Park Bench",
+    description: "A comfortable bench in the heart of the city park.",
+    price: 50,
+    seating: 3,
+    lat: 37.75403555744388,
+    lng: -122.44549642346153
+  )
+
+  # Bench 2
+  Bench.create(
+    title: "Lakeside Retreat Bench",
+    description: "Enjoy the serene view by sitting on this lakeside bench.",
+    price: 75,
+    seating: 2,
+    lat: 37.78008987155716,
+    lng: -122.28001485352814
+  )
+
+  # Bench 3
+  Bench.create(
+    title: "Cozy Garden Bench",
+    description: "A small and cozy bench nestled in a beautiful garden.",
+    price: 30,
+    seating: 2,
+    lat: 37.6845125216827,
+    lng: -122.4036110468394
+  )
+
+  # Bench 4
+  Bench.create(
+    title: "Mountain View Bench",
+    description: "Take in the breathtaking mountain views from this sturdy bench.",
+    price: 90,
+    seating: 4,
+    lat: 37.74860642003675,
+    lng: -122.48188863593654
+  )
+
+  # Bench 5
+  Bench.create(
+    title: "Beachfront Relaxation Bench",
+    description: "Unwind by the beach on this comfortable beachfront bench.",
+    price: 60,
+    seating: 3,
+    lat: 37.6769044817534,
+    lng: -122.45579610623749
+  )
+
   puts "Done!"
 end
