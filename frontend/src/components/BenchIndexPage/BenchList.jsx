@@ -5,13 +5,10 @@ const BenchList = ({ benches }) => {
   console.log('🦋🦋🦋 ~ benches:', benches);
 
   return (
-    <div>
-      <h1>Bench List</h1>
-
+    <div className='bench-list'>
       {Object.values(benches).map(bench => (
         <BenchListItem bench={bench} key={bench.id}/>
       ))}
-
     </div>
   )
 }

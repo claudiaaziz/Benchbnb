@@ -5,7 +5,7 @@ const BenchListItem = ({ bench }) => {
   const history = useHistory()
 
   return (
-    <div onClick={() => history.push(`benches/${bench.id}`)}>
+    <div onClick={() => history.push(`benches/${bench.id}`)} className='bench-list-item'>
       <h2>{bench.title}</h2>
       <p>${bench.price}</p>
     </div>

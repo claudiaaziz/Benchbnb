@@ -9,6 +9,16 @@
   justify-content: center;
 } */
 
+html, body {
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+}
+
+/* @font-face {
+  font-family: 'Montserrat';
+  src: url('https: //fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap') format('opentype');
+} */
+
 .errors {
   color: red;
 }
@@ -19,4 +29,8 @@ ul {
 
 a {
   text-decoration: none;
+}
+
+button {
+  border: none;
 }
