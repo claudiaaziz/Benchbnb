@@ -10,7 +10,6 @@ const BenchIndexPage = () => {
 
   useEffect(() => {
     dispatch(fetchBenches())
-    console.log("useEffect in BenchIndexPage hit")
   }, [])
 
   return (

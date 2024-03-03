@@ -11,10 +11,7 @@ const BenchShowPage = () => {
 
   useEffect(() => {
     dispatch(fetchBench(benchId))
-    console.log("useEffect in BenchShowPage hit")
   }, [])
-
-  console.log('🦋🦋🦋 ~ bench:', bench);
 
   return (
     <>

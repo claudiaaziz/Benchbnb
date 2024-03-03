@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import "./BenchFormPage.css"
 import { createBench } from '../../store/benches';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 const BenchFormPage = () => {
   const history = useHistory()
@@ -20,7 +19,7 @@ const BenchFormPage = () => {
   const [errors, setErrors] = useState([])
 
   const sessionUser = useSelector(state => state.session.user)
-  if (!sessionUser) return <Redirect to="/"/>
+  if (!sessionUser) return history.push("/")
 
   const handleSubmit = async (e) => {
     setErrors([])
@@ -31,13 +30,12 @@ const BenchFormPage = () => {
 
     e.preventDefault()
     const newBenchData = {title, price, description, seating, lat, lng}
-    const newBench = await dispatch(createBench(newBenchData))
+    const res = await dispatch(createBench(newBenchData))
 
-    if (newBench?.bench?.title) {
+    if (res?.bench) {
       history.push("/")
     } else {
-      const {errors} = newBench
-      console.log('🦋🦋🦋 ~ errors:', errors);
+      const { errors } = res
       setErrors([...errors])
     }
   }
@@ -45,7 +43,7 @@ const BenchFormPage = () => {
   return (
     <div className='bench-form-page'>
       {errors &&
-        <ul>
+        <ul className='errors'>
           {errors.map(error => <li key={error}>{error}</li>)} 
         </ul>
       }
