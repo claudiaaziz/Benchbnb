@@ -23,12 +23,13 @@ const Navigation = () => {
   }
 
   return (
-    <ul>
-      <li>
-        <NavLink exact to="/">Home</NavLink>
+    <>
+      <div className='nav'>
+        <NavLink exact to="/" className="logo">benchbnb</NavLink>
         {sessionLinks}
-      </li>
-    </ul>
+      </div>
+      <hr />
+    </>
   );
 }
 

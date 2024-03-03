@@ -19,10 +19,8 @@ const BenchShowPage = () => {
     <>
       {bench &&
         <>
-          <Link to="/">Benchbnb</Link>
           <h1>{bench.title}</h1>
           <div>
-            <h2>Details</h2>
             <p>{bench.description}</p>
             <ul>
               <li>Seating: {bench.seating}</li>
