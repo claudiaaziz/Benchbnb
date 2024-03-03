@@ -3,8 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from 'react-router-dom';
 import "./BenchFormPage.css"
 import { createBench } from '../../store/benches';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 const BenchFormPage = () => {
+  const history = useHistory()
   const dispatch = useDispatch()
 
   // temp
@@ -20,14 +22,34 @@ const BenchFormPage = () => {
   const sessionUser = useSelector(state => state.session.user)
   if (!sessionUser) return <Redirect to="/"/>
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    setErrors([])
+    setTitle("")
+    setPrice(0)
+    setDescription("")
+    setSeating(0)
+
     e.preventDefault()
     const newBenchData = {title, price, description, seating, lat, lng}
-    dispatch(createBench(newBenchData))
+    const newBench = await dispatch(createBench(newBenchData))
+
+    if (newBench?.bench?.title) {
+      history.push("/")
+    } else {
+      const {errors} = newBench
+      console.log('🦋🦋🦋 ~ errors:', errors);
+      setErrors([...errors])
+    }
   }
 
   return (
     <div className='bench-form-page'>
+      {errors &&
+        <ul>
+          {errors.map(error => <li key={error}>{error}</li>)} 
+        </ul>
+      }
+
       <form onSubmit={(e) => handleSubmit(e)}>
         <label htmlFor="title">Title:</label>
         <input id='title' type="text" value={title} onChange={(e) => setTitle(e.target.value)} />

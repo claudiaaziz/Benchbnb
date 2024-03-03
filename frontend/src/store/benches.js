@@ -41,8 +41,9 @@ export const createBench = (benchData) => async (dispatch) => {
     dispatch(setBench(newBench));
     return newBench;
   } catch (error) {
+    const validationErrors = await error.json();
     console.error("Error creating bench:", error);
-    return null;
+    return validationErrors;
   }
 };
 
