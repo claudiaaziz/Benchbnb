@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import "./BenchFormPage.css"
 import { createBench } from '../../store/benches';
+import { useInput } from '../../hooks';
 
 const BenchFormPage = () => {
   const history = useHistory()
@@ -12,10 +13,10 @@ const BenchFormPage = () => {
   const lat = 40.759004472452055
   const lng = -73.98328675719945
 
-  const [title, setTitle] = useState("")
-  const [price, setPrice] = useState(0)
-  const [description, setDescription] = useState("")
-  const [seating, setSeating] = useState(0)
+  const [title, onTitleChange] = useInput("")
+  const [price, onPriceChange] = useInput(0)
+  const [description, onDescriptionChange] = useInput("")
+  const [seating, onSeatingChange] = useInput(0)
   const [errors, setErrors] = useState([])
 
   const sessionUser = useSelector(state => state.session.user)
@@ -23,10 +24,6 @@ const BenchFormPage = () => {
 
   const handleSubmit = async (e) => {
     setErrors([])
-    setTitle("")
-    setPrice(0)
-    setDescription("")
-    setSeating(0)
 
     e.preventDefault()
     const newBenchData = {title, price, description, seating, lat, lng}
@@ -50,16 +47,16 @@ const BenchFormPage = () => {
 
       <form onSubmit={(e) => handleSubmit(e)}>
         <label htmlFor="title">Title:</label>
-        <input id='title' type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+        <input id='title' type="text" value={title} onChange={onTitleChange} />
 
         <label htmlFor="price">Price:</label>
-        <input id='price' type="number" value={price} onChange={(e) => setPrice(e.target.value)} />
+        <input id='price' type="number" value={price} onChange={onPriceChange} />
 
         <label htmlFor="description">Description:</label>
-        <textarea id='description' type="textarea" value={description} onChange={(e) => setDescription(e.target.value)} />
+        <textarea id='description' type="textarea" value={description} onChange={onDescriptionChange} />
 
         <label htmlFor="seating">Seating:</label>
-        <input id='seating' type="number" value={seating} onChange={(e) => setSeating(e.target.value)} />
+        <input id='seating' type="number" value={seating} onChange={onSeatingChange} />
 
         <label htmlFor="lat">Lat:</label>
         <input type="text" id="lat" value={lat} disabled />

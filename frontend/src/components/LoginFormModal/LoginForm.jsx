@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 import "./LoginForm.css";
+import { useInput } from "../../hooks";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
-  const [credential, setCredential] = useState("");
-  const [password, setPassword] = useState("");
+  const [credential, onCredentialChange] = useInput("");
+  const [password, onPasswordChange] = useInput("");
   const [errors, setErrors] = useState([]);
 
   const handleSubmit = (e) => {
@@ -38,7 +39,7 @@ const LoginForm = () => {
           type="text"
           placeholder="Username or Email"
           value={credential}
-          onChange={(e) => setCredential(e.target.value)}
+          onChange={onCredentialChange}
           required
           autoFocus
         />
@@ -49,7 +50,7 @@ const LoginForm = () => {
           type="password"
           placeholder="Password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={onPasswordChange}
           required
         />
       </label>

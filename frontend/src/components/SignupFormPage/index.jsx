@@ -3,14 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import "./SignupForm.css"
+import { useInput } from "../../hooks";
 
 function SignupFormPage() {
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [email, onEmailChange] = useInput("");
+  const [username, onUsernameChange] = useInput("");
+  const [password, onPasswordChange] = useInput("");
+  const [confirmPassword, onConfirmPasswordChange] = useInput("");
   const [errors, setErrors] = useState([]);
 
   if (sessionUser) return <Redirect to="/" />;
@@ -46,7 +47,7 @@ function SignupFormPage() {
         <input
           type="text"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={onEmailChange}
           required
           autoFocus
         />
@@ -56,7 +57,7 @@ function SignupFormPage() {
         <input
           type="text"
           value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          onChange={onUsernameChange}
           required
         />
       </label>
@@ -65,7 +66,7 @@ function SignupFormPage() {
         <input
           type="password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={onPasswordChange}
           required
         />
       </label>
@@ -74,7 +75,7 @@ function SignupFormPage() {
         <input
           type="password"
           value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
+          onChange={onConfirmPasswordChange}
           required
         />
       </label>
