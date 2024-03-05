@@ -6,11 +6,11 @@ class Api::BenchesController < ApplicationController
 
   def create
     @bench = Bench.new(bench_params)
+    @user
 
     if @bench.save
       render :show
     else
-      # puts @bench.errors.full_messages
       render json: { errors: @bench.errors.full_messages }, status: 422
     end
   end

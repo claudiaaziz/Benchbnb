@@ -10,7 +10,7 @@ class Review < ApplicationRecord
 
   def not_a_duplicate
     if Review.where(user_id: user_id, bench_id: bench_id).exists?
-      errors.add(:base, 'You have already reviewed this bench!🤪')
+      errors.add(:base, 'You have already reviewed this bench.')
     end
   end
 end
