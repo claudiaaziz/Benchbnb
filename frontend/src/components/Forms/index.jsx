@@ -9,7 +9,7 @@ export const Input = ({ label, type = "text", ...inputProps }) => {
 
 export const TextArea = ({ label, ...inputProps }) => {
   return (
-    <label className="input">
+    <label>
       {label}
       <textarea {...inputProps} />
     </label>

@@ -10,7 +10,7 @@ class Api::BenchesController < ApplicationController
     if @bench.save
       render :show
     else
-      puts @bench.errors.full_messages
+      # puts @bench.errors.full_messages
       render json: { errors: @bench.errors.full_messages }, status: 422
     end
   end
