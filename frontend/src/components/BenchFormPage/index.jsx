@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import "./BenchFormPage.css"
 import { createBench } from '../../store/benches';
 import { useInput } from '../../hooks';
+import { FormErrors, Input, TextArea } from '../Forms';
 
 const BenchFormPage = () => {
   const history = useHistory()
@@ -39,31 +40,54 @@ const BenchFormPage = () => {
 
   return (
     <div className='bench-form-page'>
-      {errors &&
-        <ul className='errors'>
-          {errors.map(error => <li key={error}>{error}</li>)} 
-        </ul>
-      }
+      {errors.length > 0 && <FormErrors errors={errors}/>}
 
       <form onSubmit={(e) => handleSubmit(e)}>
-        <label htmlFor="title">Title:</label>
-        <input id='title' type="text" value={title} onChange={onTitleChange} />
-
-        <label htmlFor="price">Price:</label>
-        <input id='price' type="number" value={price} onChange={onPriceChange} />
-
-        <label htmlFor="description">Description:</label>
-        <textarea id='description' type="textarea" value={description} onChange={onDescriptionChange} />
-
-        <label htmlFor="seating">Seating:</label>
-        <input id='seating' type="number" value={seating} onChange={onSeatingChange} />
-
-        <label htmlFor="lat">Lat:</label>
-        <input type="text" id="lat" value={lat} disabled />
-
-        <label htmlFor="lng">Lng:</label>
-        <input type="text" id="lng" value={lng} disabled />
-
+        <Input
+          label="Title:"
+          placeholder="Title"
+          value={title}
+          onChange={onTitleChange}
+          required
+          autoFocus
+        />
+        <Input
+          label="Price:"
+          placeholder="Price"
+          type='number'
+          value={price}
+          onChange={onPriceChange}
+          required
+        />
+        <TextArea
+          label="Description:"
+          placeholder="Description"
+          value={description}
+          onChange={onDescriptionChange}
+          required
+        />
+        <Input
+          label="Seating:"
+          type='number'
+          placeholder="Seating"
+          value={seating}
+          onChange={onSeatingChange}
+          required
+        />
+        <Input
+          label="Lat:"
+          type='number'
+          placeholder="Lat"
+          value={lat}
+          disabled
+        />
+        <Input
+          label="Lng:"
+          type='number'
+          placeholder="Lng"
+          value={lng}
+          disabled
+        />
         <button type="submit">Create Bench</button>
       </form>
     </div>

@@ -4,6 +4,7 @@ import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import "./SignupForm.css"
 import { useInput } from "../../hooks";
+import { FormErrors, Input } from "../Forms";
 
 function SignupFormPage() {
   const dispatch = useDispatch();
@@ -39,46 +40,39 @@ function SignupFormPage() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <ul className="errors">
-        {errors.map(error => <li key={error}>{error}</li>)}
-      </ul>
-      <label>
-        Email
-        <input
-          type="text"
-          value={email}
-          onChange={onEmailChange}
-          required
-          autoFocus
-        />
-      </label>
-      <label>
-        Username
-        <input
-          type="text"
-          value={username}
-          onChange={onUsernameChange}
-          required
-        />
-      </label>
-      <label>
-        Password
-        <input
-          type="password"
-          value={password}
-          onChange={onPasswordChange}
-          required
-        />
-      </label>
-      <label>
-        Confirm Password
-        <input
-          type="password"
-          value={confirmPassword}
-          onChange={onConfirmPasswordChange}
-          required
-        />
-      </label>
+      {errors.length > 0 && <FormErrors errors={errors}/>}
+
+      <Input
+        label="Email:"
+        placeholder="Email"
+        value={email}
+        onChange={onEmailChange}
+        required
+        autoFocus
+      />
+      <Input
+        label="Username:"
+        placeholder="Username"
+        value={username}
+        onChange={onUsernameChange}
+        required
+      />
+      <Input
+        label="Password:"
+        placeholder="Password"
+        type="password"
+        value={password}
+        onChange={onPasswordChange}
+        required
+      />
+      <Input
+        label="Confirm Password:"
+        placeholder="Confirm Password"
+        type="password"
+        value={confirmPassword}
+        onChange={onConfirmPasswordChange}
+        required
+      />
       <button type="submit">Sign Up</button>
     </form>
   );
