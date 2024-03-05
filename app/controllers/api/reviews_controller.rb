@@ -5,7 +5,7 @@ class Api::ReviewsController < ApplicationController
     @review = current_user.reviews.build(review_params)
 
     if @review.save
-      render json: { review: @review }
+      render :show
     else
       puts @review.errors.full_messages
       render json: { errors: @review.errors.full_messages }, status: 422
@@ -14,12 +14,17 @@ class Api::ReviewsController < ApplicationController
 
   def destroy
     @review = current_user.reviews.find(params[:id])
-    @review.destroy
+
+    if @review.destroy
+      render json: { message: 'Review deleted successfully', deleted_review: @review }
+    else
+      render json: { errors: @review.errors.full_messages }, status: 422
+    end
   end
 
   private
 
   def review_params 
-    params.require(:review).permit(:body, :user_id, :bench_id, :rating)
+    params.require(:review).permit(:body, :bench_id, :rating)
   end
 end
