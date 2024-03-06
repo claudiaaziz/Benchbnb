@@ -24,10 +24,8 @@ export const createReview = (reviewData) => async (dispatch) => {
     });
 
     if (!res.ok) throw res;
-    console.log('🦋🦋🦋 ~ res:', res);
 
     const newReview = await res.json();
-    console.log('🦋🦋🦋 ~ newReview:', newReview);
     dispatch(setReview(newReview));
     return newReview;
   } catch (error) {

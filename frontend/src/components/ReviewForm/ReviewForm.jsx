@@ -28,7 +28,7 @@ const ReviewForm = ({ benchId, onClose }) => {
     <form onSubmit={handleSubmit}>
       {errors.length > 0 && <FormErrors errors={errors}/>}
         <Input
-          label="Rate this bench"
+          label="Rate this bench:"
           type='number'
           value={rating}
           onChange={onRatingChange}

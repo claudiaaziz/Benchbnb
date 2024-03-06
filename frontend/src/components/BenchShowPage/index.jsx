@@ -11,6 +11,8 @@ const BenchShowPage = () => {
   const { benchId } = useParams()
   const bench = useSelector(state => state?.benches[benchId])
   const reviews = bench?.reviews
+  const sessionUser = useSelector(state => state.session?.user)
+  const isUserReviewed = reviews?.some(review => review.userId === sessionUser.id);
 
   useEffect(() => {
     dispatch(fetchBench(benchId))
@@ -29,7 +31,7 @@ const BenchShowPage = () => {
               <li>Long: {bench.lng}</li>
             </ul>
           </div>
-          <ReviewFormModal benchId={benchId} />
+          {!isUserReviewed && <ReviewFormModal benchId={benchId} />}
           <h2>Reviews</h2>
           {reviews?.length > 0 ? reviews.map(review => <Review review={review} key={review.id} />) : "No reviews have been posted for this bench yet."}
         </div>
