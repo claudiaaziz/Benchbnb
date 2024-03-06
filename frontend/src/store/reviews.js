@@ -24,8 +24,10 @@ export const createReview = (reviewData) => async (dispatch) => {
     });
 
     if (!res.ok) throw res;
+    console.log('🦋🦋🦋 ~ res:', res);
 
     const newReview = await res.json();
+    console.log('🦋🦋🦋 ~ newReview:', newReview);
     dispatch(setReview(newReview));
     return newReview;
   } catch (error) {
@@ -36,17 +38,17 @@ export const createReview = (reviewData) => async (dispatch) => {
 };
 
 export const deleteReview = (reviewId) => async (dispatch) => {
-  const res = await csrfFetch(`/api/reviews${reviewId}`, {
+  const res = await csrfFetch(`/api/reviews/${reviewId}`, {
     method: "DELETE",
   });
 
   if (res.ok) dispatch(removeReview(reviewId));
 };
 
-const reviewesReducer = (state = {}, action) => {
+const reviewsReducer = (state = {}, action) => {
   switch (action.type) {
     case SET_REVIEW:
-      return { ...state, [action.payload.review.id]: action.payload.review };
+      return { ...state, [action.payload.id]: action.payload };
     case REMOVE_REVIEW:
       const newState = {...state}
       delete newState[action.payload.reviewId]
@@ -56,4 +58,4 @@ const reviewesReducer = (state = {}, action) => {
   }
 };
 
-export default reviewesReducer;
+export default reviewsReducer;

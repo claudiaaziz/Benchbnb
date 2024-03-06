@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchBench } from '../../store/benches';
 import "./BenchShowPage.css"
-import Review from './Review';
+import Review from './ReviewShow';
+import ReviewFormModal from '../ReviewForm';
 
 const BenchShowPage = () => {
   const dispatch = useDispatch()
@@ -25,12 +26,12 @@ const BenchShowPage = () => {
             <ul>
               <li>Seating: {bench.seating}</li>
               <li>Lat: {bench.lat}</li>
-              <li>Long: {bench.long}</li>
+              <li>Long: {bench.lng}</li>
             </ul>
           </div>
-          <button>Review</button>
+          <ReviewFormModal benchId={benchId} />
           <h2>Reviews</h2>
-          {reviews?.length > 0 ? reviews.map(review => <Review review={review} key={review.id} />) : "No reviews."}
+          {reviews?.length > 0 ? reviews.map(review => <Review review={review} key={review.id} />) : "No reviews have been posted for this bench yet."}
         </div>
       }
     </>

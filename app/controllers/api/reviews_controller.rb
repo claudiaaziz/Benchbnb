@@ -1,4 +1,5 @@
 class Api::ReviewsController < ApplicationController
+  wrap_parameters include: Review.attribute_names + ['benchId']
   before_action :require_logged_in
 
   def create
@@ -7,7 +8,8 @@ class Api::ReviewsController < ApplicationController
     if @review.save
       render :show
     else
-      puts @review.errors.full_messages
+      # puts  @review.errors.full_messages
+
       render json: { errors: @review.errors.full_messages }, status: 422
     end
   end
