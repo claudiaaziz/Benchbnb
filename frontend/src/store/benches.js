@@ -1,4 +1,5 @@
 import csrfFetch from "./csrf";
+import { SET_REVIEW } from "./reviews";
 
 export const SET_BENCHES = "benches/SET_BENCHES";
 export const SET_BENCH = "benches/SET_BENCH";

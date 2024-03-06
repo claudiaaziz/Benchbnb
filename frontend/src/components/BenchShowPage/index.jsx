@@ -9,10 +9,10 @@ import ReviewFormModal from '../ReviewForm';
 const BenchShowPage = () => {
   const dispatch = useDispatch()
   const { benchId } = useParams()
-  const bench = useSelector(state => state?.benches[benchId])
+  const bench = useSelector(state => state?.benches?.[benchId])
   const reviews = bench?.reviews
-  const sessionUser = useSelector(state => state.session?.user)
-  const isUserReviewed = reviews?.some(review => review.userId === sessionUser.id);
+  const sessionUser = useSelector(state => state?.session?.user)
+  const isUserReviewed = reviews?.some(review => review.userId === sessionUser?.id);
 
   useEffect(() => {
     dispatch(fetchBench(benchId))
@@ -31,7 +31,7 @@ const BenchShowPage = () => {
               <li>Long: {bench.lng}</li>
             </ul>
           </div>
-          {!isUserReviewed && <ReviewFormModal benchId={benchId} />}
+          {!isUserReviewed && sessionUser && <ReviewFormModal benchId={benchId} />}
           <h2>Reviews</h2>
           {reviews?.length > 0 ? reviews.map(review => <Review review={review} key={review.id} />) : "No reviews have been posted for this bench yet."}
         </div>

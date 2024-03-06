@@ -12,7 +12,7 @@ const ReviewShow = ({ review }) => {
       <li>{review.username}</li>
       <li>{review.rating}/5</li>
       <li>{review.body}</li>
-      {sessionUser.id === review.userId && <button onClick={handleDeleteReview} className="delete-review">Delete your review</button>}
+      {sessionUser?.id === review.userId && <button onClick={handleDeleteReview} className="delete-review">Delete your review</button>}
     </ul>
   )
 }
