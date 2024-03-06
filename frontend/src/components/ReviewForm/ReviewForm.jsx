@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useInput } from "../../hooks";
 import { FormErrors, Input, TextArea } from "../Forms";
 import "./ReviewForm.css"
-import { createReview } from "../../store/reviews";
+import { createReview, fetchBench } from "../../store/benches";
 
 const ReviewForm = ({ benchId, onClose }) => {
   const dispatch = useDispatch();
@@ -18,6 +18,7 @@ const ReviewForm = ({ benchId, onClose }) => {
 
     if (res.rating) {
       onClose()
+      dispatch(fetchBench(benchId))
     } else {
       const validationErrors = res.errors
       setErrors([...validationErrors])

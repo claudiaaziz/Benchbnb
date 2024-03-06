@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchBench } from '../../store/benches';
 import "./BenchShowPage.css"
-import Review from './ReviewShow';
 import ReviewFormModal from '../ReviewForm';
+import ReviewShow from './ReviewShow';
 
 const BenchShowPage = () => {
   const dispatch = useDispatch()
@@ -16,7 +16,8 @@ const BenchShowPage = () => {
 
   useEffect(() => {
     dispatch(fetchBench(benchId))
-  }, [])
+    console.log("hit useeffect in bench show")
+  }, [benchId, dispatch])
 
   return (
     <>
@@ -33,7 +34,7 @@ const BenchShowPage = () => {
           </div>
           {!isUserReviewed && sessionUser && <ReviewFormModal benchId={benchId} />}
           <h2>Reviews</h2>
-          {reviews?.length > 0 ? reviews.map(review => <Review review={review} key={review.id} />) : "No reviews have been posted for this bench yet."}
+          {reviews?.length > 0 ? reviews.map(review => <ReviewShow review={review} benchId={benchId} key={review.id} />) : "No reviews have been posted for this bench yet."}
         </div>
       }
     </>

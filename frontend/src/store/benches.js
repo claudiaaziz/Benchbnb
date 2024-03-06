@@ -1,8 +1,9 @@
 import csrfFetch from "./csrf";
-import { SET_REVIEW } from "./reviews";
 
 export const SET_BENCHES = "benches/SET_BENCHES";
 export const SET_BENCH = "benches/SET_BENCH";
+export const SET_REVIEW = "reviews/SET_REVIEW";
+export const REMOVE_REVIEW = "reviews/REMOVE_REVIEW";
 
 const setBenches = (benches) => ({
   type: SET_BENCHES,
@@ -12,6 +13,16 @@ const setBenches = (benches) => ({
 const setBench = (bench) => ({
   type: SET_BENCH,
   payload: bench,
+});
+
+const setReview = (review) => ({
+  type: SET_REVIEW,
+  payload: review,
+});
+
+const removeReview = (reviewId, benchId) => ({
+  type: REMOVE_REVIEW,
+  payload: { reviewId, benchId: Number(benchId) },
 });
 
 export const fetchBenches = () => async (dispatch) => {
@@ -48,12 +59,59 @@ export const createBench = (benchData) => async (dispatch) => {
   }
 };
 
+export const createReview = (reviewData) => async (dispatch) => {
+  try {
+    const res = await csrfFetch("/api/reviews", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(reviewData),
+    });
+
+    if (!res.ok) throw res;
+
+    const newReview = await res.json();
+    dispatch(setReview(newReview));
+    return newReview;
+  } catch (error) {
+    const validationErrors = await error.json();
+    console.error("Error creating review:", error);
+    return validationErrors;
+  }
+};
+
+export const deleteReview = (reviewId, benchId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/reviews/${reviewId}`, {
+    method: "DELETE",
+  });
+
+  if (res.ok) dispatch(removeReview(reviewId, benchId));
+};
+
 const benchesReducer = (state = {}, action) => {
   switch (action.type) {
     case SET_BENCHES:
       return { ...action.payload };
     case SET_BENCH:
       return { ...state, [action.payload.bench.id]: action.payload.bench };
+    case SET_REVIEW:
+      return {
+        ...state,
+        ...state[action.payload.benchId].reviews.push(action.payload),
+      };
+    case REMOVE_REVIEW:
+      const reviewsLeft = state[action.payload.benchId].reviews.filter(
+        (review) => review.id !== action.payload.reviewId
+      );
+
+      return {
+        ...state,
+        [action.payload.benchId]: {
+          ...state[action.payload.benchId],
+          reviews: reviewsLeft,
+        },
+      };
     default:
       return state;
   }
