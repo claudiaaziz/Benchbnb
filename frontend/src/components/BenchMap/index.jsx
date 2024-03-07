@@ -8,11 +8,13 @@ const BenchMap = ({ benches, mapOptions, markerEventHandlers, mapEventHandlers }
 
   useEffect(() => { // useEffect to set up the map
     if (!map) {
-      const options = { zoom: 12, center: { lat: 37.7749, lng: -122.4194 }, ...mapOptions};
+      const options = { zoom: 12, center: { lat: 37.73434011155514, lng: -122.37602233886719 }, ...mapOptions};
       const googleMap = new window.google.maps.Map(mapRef.current, options)
-      Object.entries(mapEventHandlers).forEach(([event, handler]) => { // // Apply map event handlers 
-        window.google.maps.event.addListener(googleMap, event, (args) => handler(args, googleMap));
-      });
+      if (mapEventHandlers) {
+        Object.entries(mapEventHandlers).forEach(([event, handler]) => { // // Apply map event handlers 
+          window.google.maps.event.addListener(googleMap, event, (args) => handler(args, googleMap));
+        });
+      }
       setMap(googleMap);
     }
   }, [map, mapOptions, mapEventHandlers])
@@ -32,9 +34,11 @@ const BenchMap = ({ benches, mapOptions, markerEventHandlers, mapEventHandlers }
         map: map
       });
 
-      Object.entries(markerEventHandlers).forEach(([event, handler]) => { // Apply marker event handlers
-        marker.addListener(event, () => handler(bench));
-      });
+      if (markerEventHandlers) {
+        Object.entries(markerEventHandlers).forEach(([event, handler]) => { // Apply marker event handlers
+          marker.addListener(event, () => handler(bench));
+        });
+      }
 
       newMarkers[bench.id] = marker;
     });
