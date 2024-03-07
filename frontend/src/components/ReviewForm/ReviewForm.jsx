@@ -26,7 +26,7 @@ const ReviewForm = ({ benchId, onClose }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="review-form">
       {errors.length > 0 && <FormErrors errors={errors}/>}
         <Input
           label="Rate this bench:"

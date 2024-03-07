@@ -1,0 +1,14 @@
+.review-form {
+  background-color: plum;
+  width: 80%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.review-form label {
+  width: 150px;
+}

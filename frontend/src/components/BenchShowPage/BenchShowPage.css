@@ -2,10 +2,18 @@
   background-color: aliceblue;
   width: 100vw;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.bench-show-page h2 {
+  font-size: 2rem;
+  margin-top: 10%;
 }
 
 .review {
-  border: 1px solid aquamarine;
   width: 20%;
   height: 15%;
   display: flex;

@@ -2,7 +2,6 @@ import csrfFetch from "./csrf";
 
 export const SET_BENCHES = "benches/SET_BENCHES";
 export const SET_BENCH = "benches/SET_BENCH";
-export const SET_REVIEW = "reviews/SET_REVIEW";
 export const REMOVE_REVIEW = "reviews/REMOVE_REVIEW";
 
 const setBenches = (benches) => ({
@@ -13,11 +12,6 @@ const setBenches = (benches) => ({
 const setBench = (bench) => ({
   type: SET_BENCH,
   payload: bench,
-});
-
-const setReview = (review) => ({
-  type: SET_REVIEW,
-  payload: review,
 });
 
 const removeReview = (reviewId, benchId) => ({
@@ -72,7 +66,6 @@ export const createReview = (reviewData) => async (dispatch) => {
     if (!res.ok) throw res;
 
     const newReview = await res.json();
-    dispatch(setReview(newReview));
     return newReview;
   } catch (error) {
     const validationErrors = await error.json();
@@ -95,11 +88,6 @@ const benchesReducer = (state = {}, action) => {
       return { ...action.payload };
     case SET_BENCH:
       return { ...state, [action.payload.bench.id]: action.payload.bench };
-    case SET_REVIEW:
-      return {
-        ...state,
-        ...state[action.payload.benchId].reviews.push(action.payload),
-      };
     case REMOVE_REVIEW:
       const reviewsLeft = state[action.payload.benchId].reviews.filter(
         (review) => review.id !== action.payload.reviewId
