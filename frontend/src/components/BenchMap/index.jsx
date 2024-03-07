@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Wrapper } from '@googlemaps/react-wrapper';
 
-const BenchMap = ({ benches, mapOptions, markerEventHandlers, mapEventHandlers }) => {
+export const BenchMap = ({ benches, mapOptions, markerEventHandlers, mapEventHandlers }) => {
   const [map, setMap] = useState(null)
   const mapRef = useRef(null);
   const markersRef = useRef({}); // bench id: google.maps.Marker object
@@ -23,7 +23,7 @@ const BenchMap = ({ benches, mapOptions, markerEventHandlers, mapEventHandlers }
 
     // Create new markers for each bench
     const newMarkers = {};
-    benches.forEach((bench) => {
+    Object.values(benches).forEach((bench) => {
       const markerPosition = new window.google.maps.LatLng(bench.lat, bench.lng);
 
       // Create marker
