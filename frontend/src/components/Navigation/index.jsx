@@ -11,10 +11,7 @@ const Navigation = () => {
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
-      <>
-        <ProfileButton user={sessionUser} />
-        <NavLink to="/benches/new">Create Bench</NavLink>
-      </>
+      <ProfileButton user={sessionUser} />
     );
   } else {
     sessionLinks = (
