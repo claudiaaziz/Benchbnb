@@ -3,6 +3,8 @@
   align-items: center;
   justify-content: space-between;
   padding: .3% 5%;
+  height: 7vh;
+  box-sizing: border-box;
 }
 
 .logo {
@@ -14,10 +16,10 @@
   padding: none;
 }
 
-.nav hr {
+/* .nav hr {
   width: 100%;
   border: .5px solid lightgrey;
-}
+} */
 
 .profile-button {
   color: #ff385c;
@@ -33,6 +35,7 @@
   right: 42.6%;
   padding: 10px;
   border-radius: 10px;
+  z-index: 1;
 }
 
 .profile-dropdown li {

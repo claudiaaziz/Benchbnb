@@ -33,7 +33,7 @@ const BenchIndexPage = () => {
   return (
     <div className='bench-index-page'>
       <BenchMapWrapper benches={benches} markerEventHandlers={markerEventHandlers} mapEventHandlers={mapEventHandlers}/>
-      {/* {benches && <BenchList benches={benches} />} */}
+      {benches && <BenchList benches={benches} />}
     </div>
   )
 }

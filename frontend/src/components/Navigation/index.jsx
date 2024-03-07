@@ -31,7 +31,7 @@ const Navigation = () => {
         <NavLink exact to="/" className="logo">benchbnb</NavLink>
         {sessionLinks}
       </div>
-      <hr />
+      {/* <hr /> */}
     </>
   );
 }

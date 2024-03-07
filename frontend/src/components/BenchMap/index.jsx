@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Wrapper } from '@googlemaps/react-wrapper';
 
-export const BenchMap = ({ benches, mapOptions, markerEventHandlers, mapEventHandlers }) => {
+const BenchMap = ({ benches, mapOptions, markerEventHandlers, mapEventHandlers }) => {
   const [map, setMap] = useState(null)
   const mapRef = useRef(null);
   const markersRef = useRef({}); // bench id: google.maps.Marker object
@@ -44,7 +44,7 @@ export const BenchMap = ({ benches, mapOptions, markerEventHandlers, mapEventHan
   }, [benches, map, markerEventHandlers]);
 
   return (
-    <div ref={mapRef}>MapMap💗</div>
+    <div className='map' ref={mapRef}></div>
   )
 }
 
