@@ -26,7 +26,7 @@ const BenchShowPage = () => {
       {bench &&
         <>
           <div className='bench-show-page'>
-            <BenchMapWrapper benches={bench} mapOptions={mapOptions} />
+            <BenchMapWrapper benches={bench} mapOptions={mapOptions} from={"show"} />
             <div className='details'>
               <h1>{bench.title}</h1>
               <div>

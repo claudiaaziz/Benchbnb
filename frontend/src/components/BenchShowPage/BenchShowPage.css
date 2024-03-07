@@ -6,12 +6,12 @@
   align-items: center;
 }
 
-.map {
+.map-show {
   padding-top: 50px;
   border-radius: 18px;
   height: 80%;
   width: 45%;
-  margin-right: 10px;
+  margin-right: 8px;
   margin-left: 0;
 }
 
