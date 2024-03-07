@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import "./BenchFormPage.css"
 import { createBench } from '../../store/benches';
 import { useInput } from '../../hooks';
@@ -8,12 +8,12 @@ import { FormErrors, Input, TextArea } from '../Forms';
 
 const BenchFormPage = () => {
   const history = useHistory()
+  const location = useLocation();
   const dispatch = useDispatch()
 
-  // temp
-  const lat = 40.759004472452055
-  const lng = -73.98328675719945
-
+  const queryParams = new URLSearchParams(location.search);
+  const lat = queryParams.get('lat') || ''; 
+  const lng = queryParams.get('lng') || '';
   const [title, onTitleChange] = useInput("")
   const [price, onPriceChange] = useInput(0)
   const [description, onDescriptionChange] = useInput("")
@@ -21,7 +21,7 @@ const BenchFormPage = () => {
   const [errors, setErrors] = useState([])
 
   const sessionUser = useSelector(state => state.session.user)
-  if (!sessionUser) return history.push("/")
+  if (!sessionUser || lat === "" || lng === "") return history.push("/")
 
   const handleSubmit = async (e) => {
     setErrors([])

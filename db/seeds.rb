@@ -10,10 +10,14 @@ ApplicationRecord.transaction do
   puts "Destroying tables..."
   # Unnecessary if using `rails db:seed:replant`
   User.destroy_all
+  Bench.destroy_all
+  Review.destroy_all 
 
   puts "Resetting primary keys..."
   # For easy testing, so that after seeding, the first `User` has `id` of 1
   ApplicationRecord.connection.reset_pk_sequence!('users')
+  ApplicationRecord.connection.reset_pk_sequence!('benches')
+  ApplicationRecord.connection.reset_pk_sequence!('reviews')
 
   puts "Creating users..."
   # Create one user with an easy to remember username, email, and password:

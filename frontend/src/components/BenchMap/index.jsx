@@ -17,7 +17,7 @@ const BenchMap = ({ benches, mapOptions, markerEventHandlers, mapEventHandlers }
     }
   }, [map, mapOptions, mapEventHandlers])
 
-  useEffect(() => { 
+  useEffect(() => { // create/ update/ delete markers
     // Clear existing markers
     Object.values(markersRef.current).forEach((marker) => marker.setMap(null));
 

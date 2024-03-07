@@ -24,7 +24,7 @@ const BenchIndexPage = () => {
       const lng = latLng.lng();
       const queryParams = new URLSearchParams({ lat, lng }).toString();
       history.push({
-        pathname: '/new-bench',
+        pathname: '/benches/new',
         search: queryParams,
       });
     },
