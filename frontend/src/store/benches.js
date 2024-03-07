@@ -65,8 +65,8 @@ export const createReview = (reviewData) => async (dispatch) => {
 
     if (!res.ok) throw res;
 
-    const newReview = await res.json();
-    return newReview;
+    const responseFromController = await res.json();
+    return responseFromController;
   } catch (error) {
     const validationErrors = await error.json();
     console.error("Error creating review:", error);

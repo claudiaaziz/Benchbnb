@@ -16,7 +16,7 @@ const ReviewForm = ({ benchId, onClose }) => {
     const review = { rating, body: description, benchId }
     const res = await dispatch(createReview(review))
 
-    if (res.rating) {
+    if (res.message) {
       onClose()
       dispatch(fetchBench(benchId))
     } else {

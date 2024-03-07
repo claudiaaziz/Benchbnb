@@ -6,10 +6,8 @@ class Api::ReviewsController < ApplicationController
     @review = current_user.reviews.build(review_params)
 
     if @review.save
-      render :show
+      render json: { message: "Review created & added to it's specific bench succesfully." }, status: :created
     else
-      # puts  @review.errors.full_messages
-
       render json: { errors: @review.errors.full_messages }, status: 422
     end
   end

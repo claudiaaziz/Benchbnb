@@ -9,7 +9,8 @@ class Review < ApplicationRecord
   private
 
   def not_a_duplicate
-    if Review.where(user_id: user_id, bench_id: bench_id).exists?
+    existing_review = Review.find_by(bench_id: bench_id, user_id: user_id)
+    if existing_review && existing_review.persisted?
       errors.add(:base, 'You have already reviewed this bench.')
     end
   end
