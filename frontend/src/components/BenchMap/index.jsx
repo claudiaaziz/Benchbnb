@@ -29,7 +29,31 @@ const BenchMap = ({ benches, mapOptions, markerEventHandlers, mapEventHandlers, 
       const coords = new window.google.maps.LatLng(bench.lat, bench.lng);
 
       // Create marker
-      const marker = new window.google.maps.Marker({ position: coords, map });
+      const marker = new window.google.maps.Marker({ 
+        map,
+        position: coords,
+        // customizations
+        label: { 
+            text: `$${bench.price}`, 
+            color: 'black',
+            fontSize: '.6.5rem'
+        }, 
+        icon: {
+            path: `
+              M 10,30
+              A 20,20 0,0,1 50,30
+              A 20,20 0,0,1 90,30
+              Q 90,60 50,90
+              Q 10,60 10,30 z`,
+            fillOpacity: 1,
+            fillColor: 'white',
+            strokeColor: '#ff385c',
+            strokeWeight: 1,
+            scale: .5,
+            labelOrigin: new window.google.maps.Point(50, 50),
+            anchor: new window.google.maps.Point(50, 50)
+          },
+        });
 
       // Apply marker event handlers
       if (markerEventHandlers) {
