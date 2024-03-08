@@ -17,22 +17,18 @@ const BenchIndexPage = () => {
 
   const markerEventHandlers = { click: (bench) => history.push(`/benches/${bench.id}`) } // navigates to that bench's show
 
-  const mapEventHandlers = { // navigates to new bench form w a query string containing the selected lat & lng
-    click: (event, map) => {
+  const mapEventHandlers = {
+    click: (event) => { // on click navigate to new bench form w a query string containing the selected lat & lng
       const { latLng } = event;
-      const lat = latLng.lat();
-      const lng = latLng.lng();
+      const { lat, lng } = latLng.toJSON();
       const queryParams = new URLSearchParams({ lat, lng }).toString();
-      history.push({
-        pathname: '/benches/new',
-        search: queryParams,
-      });
+      history.push({ pathname: '/benches/new', search: queryParams });
     },
   };
 
   return (
     <div className='bench-index-page'>
-      <BenchMapWrapper benches={benches} markerEventHandlers={markerEventHandlers} mapEventHandlers={mapEventHandlers} from={"index"}/>
+      <BenchMapWrapper benches={benches} markerEventHandlers={markerEventHandlers} mapEventHandlers={mapEventHandlers} from={"index"} />
       {benches && <BenchList benches={benches} />}
     </div>
   )

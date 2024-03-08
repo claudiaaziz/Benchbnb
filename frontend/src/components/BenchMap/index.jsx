@@ -4,15 +4,15 @@ import { Wrapper } from '@googlemaps/react-wrapper';
 const BenchMap = ({ benches, mapOptions, markerEventHandlers, mapEventHandlers, from }) => {
   const [map, setMap] = useState(null)
   const mapRef = useRef(null);
-  const markersRef = useRef({}); // bench id: google.maps.Marker object
+  const markersRef = useRef({}); // bench.id: google.maps.Marker object
 
   useEffect(() => { // useEffect to set up the map
     if (!map) {
       const options = { zoom: 12, center: { lat: 37.73434011155514, lng: -122.37602233886719 }, ...mapOptions};
       const googleMap = new window.google.maps.Map(mapRef.current, options)
       if (mapEventHandlers) {
-        Object.entries(mapEventHandlers).forEach(([event, handler]) => { // // Apply map event handlers 
-          window.google.maps.event.addListener(googleMap, event, (args) => handler(args, googleMap));
+        Object.entries(mapEventHandlers).forEach(([event, handler]) => { // Apply map event handlers 
+          window.google.maps.event.addListener(googleMap, event, (e) => handler(e, googleMap));
         });
       }
       setMap(googleMap);
@@ -26,16 +26,14 @@ const BenchMap = ({ benches, mapOptions, markerEventHandlers, mapEventHandlers, 
     // Create new markers for each bench
     const newMarkers = {};
     Object.values(benches).forEach((bench) => {
-      const markerPosition = new window.google.maps.LatLng(bench.lat, bench.lng);
+      const coords = new window.google.maps.LatLng(bench.lat, bench.lng);
 
       // Create marker
-      const marker = new window.google.maps.Marker({
-        position: markerPosition,
-        map: map
-      });
+      const marker = new window.google.maps.Marker({ position: coords, map });
 
+      // Apply marker event handlers
       if (markerEventHandlers) {
-        Object.entries(markerEventHandlers).forEach(([event, handler]) => { // Apply marker event handlers
+        Object.entries(markerEventHandlers).forEach(([event, handler]) => {
           marker.addListener(event, () => handler(bench));
         });
       }
