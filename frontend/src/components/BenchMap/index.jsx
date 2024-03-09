@@ -22,10 +22,11 @@ const BenchMap = ({ benches, mapOptions, markerEventHandlers, mapEventHandlers, 
   useEffect(() => { // create/ update/ delete markers
     // Clear existing markers
     Object.values(markersRef.current).forEach((marker) => marker.setMap(null));
+    const newMarkers = {};
 
     // Create new markers for each bench
-    const newMarkers = {};
-    Object.values(benches).forEach((bench) => {
+    const createNewMarkersForEachBench = (bench) => {
+
       const coords = new window.google.maps.LatLng(bench.lat, bench.lng);
 
       // Create marker
@@ -63,11 +64,13 @@ const BenchMap = ({ benches, mapOptions, markerEventHandlers, mapEventHandlers, 
       }
 
       newMarkers[bench.id] = marker;
-    });
+    }
+
+    from === "index" ? Object.values(benches).forEach((bench) => createNewMarkersForEachBench(bench)) : createNewMarkersForEachBench(benches)
 
     // Update the markers ref
     markersRef.current = newMarkers;
-  }, [benches, map, markerEventHandlers]);
+  }, [benches, map, markerEventHandlers, from]);
 
   return (
     <div className={`map-${from}`} ref={mapRef}></div>
