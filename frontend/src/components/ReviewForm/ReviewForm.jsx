@@ -7,7 +7,7 @@ import { createReview, fetchBench } from "../../store/benches";
 
 const ReviewForm = ({ benchId, onClose }) => {
   const dispatch = useDispatch();
-  const [rating, onRatingChange] = useInput(0);
+  const [rating, onRatingChange] = useInput(5);
   const [description, onDescriptionChange] = useInput("");
   const [errors, setErrors] = useState([]);
 
@@ -31,6 +31,8 @@ const ReviewForm = ({ benchId, onClose }) => {
         <Input
           label="Rate this bench:"
           type='number'
+          min="1"
+          max="5"
           value={rating}
           onChange={onRatingChange}
           required
@@ -38,6 +40,8 @@ const ReviewForm = ({ benchId, onClose }) => {
         <TextArea
           label="Description:"
           placeholder="Description"
+          cols="30"
+          rows="10"
           value={description}
           onChange={onDescriptionChange}
           required

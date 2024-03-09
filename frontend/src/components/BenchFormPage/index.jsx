@@ -15,9 +15,9 @@ const BenchFormPage = () => {
   const lat = queryParams.get('lat') || ''; 
   const lng = queryParams.get('lng') || '';
   const [title, onTitleChange] = useInput("")
-  const [price, onPriceChange] = useInput(0)
+  const [price, onPriceChange] = useInput(10)
   const [description, onDescriptionChange] = useInput("")
-  const [seating, onSeatingChange] = useInput(0)
+  const [seating, onSeatingChange] = useInput(2);
   const [errors, setErrors] = useState([])
 
   const sessionUser = useSelector(state => state.session.user)
@@ -55,6 +55,8 @@ const BenchFormPage = () => {
           label="Price:"
           placeholder="Price"
           type='number'
+          min="10"
+          max="1000"
           value={price}
           onChange={onPriceChange}
           required
@@ -62,6 +64,8 @@ const BenchFormPage = () => {
         <TextArea
           label="Description:"
           placeholder="Description"
+          cols="50"
+          rows="8"
           value={description}
           onChange={onDescriptionChange}
           required
@@ -69,6 +73,7 @@ const BenchFormPage = () => {
         <Input
           label="Seating:"
           type='number'
+          min="0"
           placeholder="Seating"
           value={seating}
           onChange={onSeatingChange}

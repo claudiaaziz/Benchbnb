@@ -1,9 +1,9 @@
 class Api::ReviewsController < ApplicationController
-  wrap_parameters include: Review.attribute_names + ['benchId']
   before_action :require_logged_in
+  wrap_parameters include: Review.attribute_names + ['benchId']
 
   def create
-    @review = current_user.reviews.build(review_params)
+    @review = current_user.reviews.new(review_params)
 
     if @review.save
       render json: { message: "Review created & added to it's specific bench succesfully." }, status: :created
