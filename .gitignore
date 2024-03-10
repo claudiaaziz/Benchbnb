@@ -18,6 +18,10 @@
 !/tmp/pids/
 !/tmp/pids/.keep
 
+.byebug_history
+/public
 
+/storage/*
+!/storage/.keep 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
