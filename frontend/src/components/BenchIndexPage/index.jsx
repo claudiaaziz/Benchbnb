@@ -19,9 +19,10 @@ const BenchIndexPage = () => {
   const markerEventHandlers = { click: (bench) => history.push(`/benches/${bench.id}`) } // navigates to that bench's show
 
   const mapEventHandlers = {
-    click: event => { // on click navigate to new bench form w a query string containing the selected lat & lng
-      const search = new URLSearchParams(event.latLng)
-      history.push({ pathname: '/benches/new', search });
+    click: (event) => { // on click push to new bench form w a query string containing the selected lat & lng
+      const { lat, lng } = event.latLng.toJSON();
+      const queryParams = new URLSearchParams({ lat, lng }).toString();
+      history.push({ pathname: '/benches/new', search: queryParams });
     },
     idle: map => setBounds(map.getBounds().toUrlValue())
   };
