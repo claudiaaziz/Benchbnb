@@ -6,27 +6,33 @@ const BenchMap = ({ benches, mapOptions, markerEventHandlers, mapEventHandlers, 
   const mapRef = useRef(null);
   const markersRef = useRef({}); // bench.id: google.maps.Marker object
 
-  useEffect(() => { // useEffect to set up the map
+  useEffect(() => { // create the map
     if (!map) {
       const options = { zoom: 12, center: { lat: 37.73434011155514, lng: -122.37602233886719 }, ...mapOptions};
       const googleMap = new window.google.maps.Map(mapRef.current, options)
-      if (mapEventHandlers) {
-        Object.entries(mapEventHandlers).forEach(([event, handler]) => { // Apply map event handlers 
-          window.google.maps.event.addListener(googleMap, event, (e) => handler(e, googleMap));
-        });
-      }
       setMap(googleMap);
     }
-  }, [map, mapOptions, mapEventHandlers])
+  }, [mapRef, map, mapOptions])
 
-  useEffect(() => { // create/ update/ delete markers
+  useEffect(() => { // Apply map event handlers 
+    if (map && mapEventHandlers) {
+      const listeners = Object.entries(mapEventHandlers).map(([event, handler]) => ( 
+        window.google.maps.event.addListener(map, event, (...args) => handler(...args, map))
+      ))
+
+      return () => listeners.forEach(window.google.maps.event.removeListener)
+    }
+  }, [map, mapEventHandlers])
+
+  useEffect(() => { // update map markers whenever 'benches' change
     // Clear existing markers
-    Object.values(markersRef.current).forEach((marker) => marker.setMap(null));
-    const newMarkers = {};
+    Object.entries(markersRef.current).forEach(([benchId, marker]) => {
+      marker.setMap(null)
+      delete markersRef.current[benchId];
+    });
 
     // Create new markers for each bench
     const createNewMarkersForEachBench = (bench) => {
-
       const coords = new window.google.maps.LatLng(bench.lat, bench.lng);
 
       // Create marker
@@ -63,13 +69,10 @@ const BenchMap = ({ benches, mapOptions, markerEventHandlers, mapEventHandlers, 
         });
       }
 
-      newMarkers[bench.id] = marker;
+      markersRef.current[bench.id] = marker
     }
 
     from === "index" ? Object.values(benches).forEach((bench) => createNewMarkersForEachBench(bench)) : createNewMarkersForEachBench(benches)
-
-    // Update the markers ref
-    markersRef.current = newMarkers;
   }, [benches, map, markerEventHandlers, from]);
 
   return (

@@ -21,30 +21,26 @@ const BenchShowPage = () => {
 
   const mapOptions = { center: { lat: bench?.lat, lng: bench?.lng } }
 
+  if (!bench) return
+
   return (
-    <>
-      {bench &&
-        <>
-          <div className='bench-show-page'>
-            <BenchMapWrapper benches={bench} mapOptions={mapOptions} from={"show"} />
-            <div className='details'>
-              <h1>{bench.title}</h1>
-              <div>
-                <p>{bench.description}</p>
-                <ul>
-                  <li>Seating: {bench.seating}</li>
-                  <li>Lat: {bench.lat}</li>
-                  <li>Long: {bench.lng}</li>
-                </ul>
-              </div>
-              {!isUserReviewed && sessionUser && <ReviewFormModal benchId={benchId} />}
-              <h2>Reviews</h2>
-              {reviews?.length > 0 ? reviews.map(review => <ReviewShow review={review} benchId={benchId} key={review.id} />) : "No reviews have been posted for this bench yet."}
-            </div>
-          </div>
-        </>
-      }
-    </>
+    <div className='bench-show-page'>
+      <BenchMapWrapper benches={bench} mapOptions={mapOptions} from={"show"} />
+      <div className='details'>
+        <h1>{bench.title}</h1>
+        <div>
+          <p>{bench.description}</p>
+          <ul>
+            <li>Seating: {bench.seating}</li>
+            <li>Lat: {bench.lat}</li>
+            <li>Long: {bench.lng}</li>
+          </ul>
+        </div>
+        {!isUserReviewed && sessionUser && <ReviewFormModal benchId={benchId} />}
+        <h2>Reviews</h2>
+        {reviews?.length > 0 ? reviews.map(review => <ReviewShow review={review} benchId={benchId} key={review.id} />) : "No reviews have been posted for this bench yet."}
+      </div>
+    </div>
   )
 }
 

@@ -19,8 +19,9 @@ const removeReview = (reviewId, benchId) => ({
   payload: { reviewId, benchId: Number(benchId) },
 });
 
-export const fetchBenches = () => async (dispatch) => {
-  const res = await csrfFetch("/api/benches");
+export const fetchBenches = filters => async (dispatch) => {
+  const filterParams = new URLSearchParams(filters)
+  const res = await csrfFetch(`/api/benches?${filterParams}`);
   const benches = await res.json();
   dispatch(setBenches(benches));
 };

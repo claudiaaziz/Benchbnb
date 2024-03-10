@@ -2,8 +2,12 @@ class Api::BenchesController < ApplicationController
   before_action :require_logged_in, only: :create
 
   def index
-    @benches = Bench.all
-    render :index
+    if params[:bounds]
+      bounds = params[:bounds].split(',').map(&:to_f)
+      @benches = Bench.in_bounds(bounds)
+    else
+      @benches = Bench.all
+    end
   end
 
   def create
