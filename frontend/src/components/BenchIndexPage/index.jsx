@@ -10,7 +10,7 @@ const BenchIndexPage = () => {
   const history = useHistory();
   const dispatch = useDispatch()
   const benches = useSelector(state => state?.benches)
-  const [bounds, setBounds] = useState({});
+  const [bounds, setBounds] = useState(null);
 
   useEffect(() => {
     bounds && dispatch(fetchBenches({bounds}))
@@ -20,12 +20,10 @@ const BenchIndexPage = () => {
 
   const mapEventHandlers = {
     click: event => { // on click navigate to new bench form w a query string containing the selected lat & lng
-      const { latLng } = event;
-      const { lat, lng } = latLng.toJSON();
-      const queryParams = new URLSearchParams({ lat, lng }).toString();
-      history.push({ pathname: '/benches/new', search: queryParams });
+      const search = new URLSearchParams(event.latLng)
+      history.push({ pathname: '/benches/new', search });
     },
-    idle: map => setBounds(map?.getBounds().toUrlValue())
+    idle: map => setBounds(map.getBounds().toUrlValue())
   };
 
   return (
