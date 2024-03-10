@@ -1,19 +1,19 @@
 import { Input } from "../Forms";
 
-const FilterForm = ({ minSeating, setMinSeating, maxSeating, setMaxSeating }) => {
+const FilterForm = ({ minSeating, onMinSeatingChange, maxSeating, onMaxSeatingChange }) => {
   return (
     <div className="filter-form">
       <Input
         label="Minimum Seats:"
         type="number"
         value={minSeating}
-        onChange={(e) => setMinSeating(e.target.value)}
-      /> 
+        onChange={onMinSeatingChange}
+        /> 
       <Input
         label="Maximum Seats:"
         type="number"
         value={maxSeating}
-        onChange={(e) => setMaxSeating(e.target.value)}
+        onChange={onMaxSeatingChange}
       /> 
     </div>
   )

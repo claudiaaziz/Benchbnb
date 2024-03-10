@@ -1,5 +1,6 @@
 class Api::BenchesController < ApplicationController
   before_action :require_logged_in, only: :create
+  wrap_parameters include: Bench.attribute_names + [:photo], format: :multipart_form
 
   def index
     @benches = Bench.all
@@ -9,7 +10,6 @@ class Api::BenchesController < ApplicationController
 
   def create
     @bench = Bench.new(bench_params)
-    @user
 
     if @bench.save
       render :show
@@ -25,7 +25,7 @@ class Api::BenchesController < ApplicationController
   private
 
   def bench_params 
-    params.require(:bench).permit(:price, :seating, :lat, :lng, :title, :description)
+    params.require(:bench).permit(:price, :seating, :lat, :lng, :title, :description, :photo)
   end
 
   def bounds

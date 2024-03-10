@@ -6,14 +6,15 @@ import BenchList from './BenchList';
 import "./BenchIndexPage.css"
 import BenchMapWrapper from '../BenchMap';
 import FilterForm from './FilterForm';
+import { useInput } from '../../hooks';
 
 const BenchIndexPage = () => {
   const history = useHistory();
   const dispatch = useDispatch()
   const benches = useSelector(state => state?.benches)
   const [bounds, setBounds] = useState(null);
-  const [minSeating, setMinSeating] = useState(1);
-  const [maxSeating, setMaxSeating] = useState(10);
+  const [minSeating, onMinSeatingChange] = useInput(1);
+  const [maxSeating, onMaxSeatingChange] = useInput(10);
 
   useEffect(() => {
     if (minSeating && maxSeating && bounds) {
@@ -35,7 +36,7 @@ const BenchIndexPage = () => {
   return (
     <div className='bench-index-page'>
       <BenchMapWrapper benches={benches} markerEventHandlers={markerEventHandlers} mapEventHandlers={mapEventHandlers} from={"index"} />
-      <FilterForm minSeating={minSeating} setMinSeating={setMinSeating} maxSeating={maxSeating} setMaxSeating={setMaxSeating} />
+      <FilterForm minSeating={minSeating} onMinSeatingChange={onMinSeatingChange} maxSeating={maxSeating} onMaxSeatingChange={onMaxSeatingChange} />
       {benches && <BenchList benches={benches} />}
     </div>
   )
