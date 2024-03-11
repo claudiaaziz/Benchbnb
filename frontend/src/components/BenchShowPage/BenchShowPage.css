@@ -29,6 +29,15 @@
   margin-left: 10px;
 }
 
+.bench-show-page .details img {
+  /* height: 30%; */
+  height: 200px;
+}
+
+.bench-show-page h1 {
+  font-size: 2rem;
+}
+
 .bench-show-page h2 {
   font-size: 2rem;
   margin-top: 10%;

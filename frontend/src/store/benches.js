@@ -33,24 +33,15 @@ export const fetchBench = (benchId) => async (dispatch) => {
 };
 
 export const createBench = benchFormData => async (dispatch) => {
-  console.log('🦋🦋🦋 ~ benchFormData:', benchFormData);
-  try {
     const res = await csrfFetch("/api/benches", {
       method: "POST",
       body: benchFormData,
     });
 
-    if (!res.ok) throw res;
 
     const newBench = await res.json();
-    console.log('🦋🦋🦋 ~ newBench:', newBench);
     dispatch(setBench(newBench));
-    return newBench;
-  } catch (error) {
-    const validationErrors = await error.json();
-    console.error("Error creating bench:", error);
-    return validationErrors;
-  }
+    return res;
 };
 
 export const createReview = (reviewData) => async (dispatch) => {

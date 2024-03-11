@@ -4,7 +4,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import "./BenchFormPage.css"
 import { createBench } from '../../store/benches';
 import { useInput } from '../../hooks';
-import { FormErrors, Input, TextArea } from '../Forms';
+import { Input, TextArea } from '../Forms';
 
 const BenchFormPage = () => {
   const history = useHistory()
@@ -18,7 +18,6 @@ const BenchFormPage = () => {
   const [price, onPriceChange] = useInput(10)
   const [description, onDescriptionChange] = useInput("")
   const [seating, onSeatingChange] = useInput(2);
-  const [errors, setErrors] = useState([])
   const [photoFile, setPhotoFile] = useState(null)
   const [photoUrl, setPhotoUrl] = useState(null)
 
@@ -26,7 +25,6 @@ const BenchFormPage = () => {
   if (!sessionUser || lat === "" || lng === "") return history.push("/")
 
   const handleSubmit = async (e) => {
-    setErrors([])
     e.preventDefault()
 
     const formData = new FormData()
@@ -37,15 +35,8 @@ const BenchFormPage = () => {
     formData.append('lat', lat);
     formData.append('lng', lng);
     if (photoFile) formData.append('photo', photoFile);
-
-    const res = await dispatch(createBench(formData))
-
-    if (res?.bench) {
-      history.push("/")
-    } else {
-      const { errors } = res
-      setErrors([...errors])
-    }
+    dispatch(createBench(formData))
+    history.push("/")
   }
 
   const handleFileChange = e => {
@@ -63,8 +54,7 @@ const BenchFormPage = () => {
 
   return (
     <div className='bench-form-page'>
-      {errors.length > 0 && <FormErrors errors={errors}/>}
-
+      <h1>Create A Bench!</h1>
       <form onSubmit={(e) => handleSubmit(e)}>
         <Input
           label="Title:"
