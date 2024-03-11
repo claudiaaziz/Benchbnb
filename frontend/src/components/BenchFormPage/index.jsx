@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from 'react-router-dom';
 import "./BenchFormPage.css"
@@ -19,22 +19,45 @@ const BenchFormPage = () => {
   const [description, onDescriptionChange] = useInput("")
   const [seating, onSeatingChange] = useInput(2);
   const [errors, setErrors] = useState([])
+  const [photoFile, setPhotoFile] = useState(null)
+  const [photoUrl, setPhotoUrl] = useState(null)
 
   const sessionUser = useSelector(state => state.session.user)
   if (!sessionUser || lat === "" || lng === "") return history.push("/")
 
   const handleSubmit = async (e) => {
     setErrors([])
-
     e.preventDefault()
-    const newBenchData = {title, price, description, seating, lat, lng}
-    const res = await dispatch(createBench(newBenchData))
+
+    const formData = new FormData()
+    formData.append('title', title);
+    formData.append('description', description);
+    formData.append('price', price);
+    formData.append('seating', seating);
+    formData.append('lat', lat);
+    formData.append('lng', lng);
+    if (photoFile) formData.append('photo', photoFile);
+
+    const res = await dispatch(createBench(formData))
 
     if (res?.bench) {
       history.push("/")
     } else {
       const { errors } = res
       setErrors([...errors])
+    }
+  }
+
+  const handleFileChange = e => {
+    const file = e.target.files[0]
+    if (file) {
+      const fileReader = new FileReader()
+      fileReader.readAsDataURL(file)
+
+      fileReader.onload = () => {
+        setPhotoFile(file)
+        setPhotoUrl(fileReader.result)
+      }
     }
   }
 
@@ -93,6 +116,17 @@ const BenchFormPage = () => {
           value={lng}
           disabled
         />
+        <Input
+          label="Add a Picture"
+          type='file'
+          onChange={handleFileChange}
+        />
+        {photoUrl && 
+          <div className='image-preview'>
+            <h3>Image preview</h3>
+            <img src={photoUrl} alt='bench' />
+          </div>
+        }
         <button type="submit">Create Bench</button>
       </form>
     </div>

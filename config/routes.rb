@@ -11,4 +11,7 @@ Rails.application.routes.draw do
     resources :benches, only: [:index, :create, :show]
     resources :reviews, only: [:create, :destroy]
   end
+
+  # Catch-all route to serve up frontend files
+  get '*path', to: "static_pages#frontend_index"
 end

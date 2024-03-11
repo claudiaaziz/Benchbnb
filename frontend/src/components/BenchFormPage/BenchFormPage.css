@@ -21,3 +21,7 @@
   width: 100px;
   margin-bottom: 5px;
 }
+
+.bench-form-page .image-preview img {
+  height: 50px;
+}

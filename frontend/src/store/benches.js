@@ -32,19 +32,18 @@ export const fetchBench = (benchId) => async (dispatch) => {
   dispatch(setBench(bench));
 };
 
-export const createBench = (benchData) => async (dispatch) => {
+export const createBench = benchFormData => async (dispatch) => {
+  console.log('🦋🦋🦋 ~ benchFormData:', benchFormData);
   try {
     const res = await csrfFetch("/api/benches", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(benchData),
+      body: benchFormData,
     });
 
     if (!res.ok) throw res;
 
     const newBench = await res.json();
+    console.log('🦋🦋🦋 ~ newBench:', newBench);
     dispatch(setBench(newBench));
     return newBench;
   } catch (error) {

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchBench } from '../../store/benches';
@@ -29,6 +29,7 @@ const BenchShowPage = () => {
       <div className='details'>
         <h1>{bench.title}</h1>
         <div>
+          {bench.photoUrl && <img src={bench.photoUrl} alt={bench.title} />}
           <p>{bench.description}</p>
           <ul>
             <li>Seating: {bench.seating}</li>
