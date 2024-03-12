@@ -1,19 +1,19 @@
 import { useState } from 'react'
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useHistory, useLocation } from 'react-router-dom';
 import "./BenchFormPage.css"
 import { createBench } from '../../store/benches';
-import { useInput } from '../../hooks';
-import { Input, TextArea } from '../Forms';
+import { useInput, useSubmit } from '../../hooks';
+import { FormErrors, Input, TextArea } from '../Forms';
 
 const BenchFormPage = () => {
   const history = useHistory()
   const location = useLocation();
-  const dispatch = useDispatch()
-
+  
   const queryParams = new URLSearchParams(location.search);
   const lat = queryParams.get('lat') || ''; 
   const lng = queryParams.get('lng') || '';
+  const sessionUser = useSelector(state => state.session.user)
   const [title, onTitleChange] = useInput("")
   const [price, onPriceChange] = useInput(10)
   const [description, onDescriptionChange] = useInput("")
@@ -21,23 +21,21 @@ const BenchFormPage = () => {
   const [photoFile, setPhotoFile] = useState(null)
   const [photoUrl, setPhotoUrl] = useState(null)
 
-  const sessionUser = useSelector(state => state.session.user)
-  if (!sessionUser || lat === "" || lng === "") return history.push("/")
+  const [errors, onSubmit] = useSubmit({
+    createAction: () => {
+      const formData = new FormData()
+      formData.append('title', title);
+      formData.append('description', description);
+      formData.append('price', price);
+      formData.append('seating', seating);
+      formData.append('lat', lat);
+      formData.append('lng', lng);
+      if (photoFile) formData.append('photo', photoFile);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-
-    const formData = new FormData()
-    formData.append('title', title);
-    formData.append('description', description);
-    formData.append('price', price);
-    formData.append('seating', seating);
-    formData.append('lat', lat);
-    formData.append('lng', lng);
-    if (photoFile) formData.append('photo', photoFile);
-    dispatch(createBench(formData))
-    history.push("/")
-  }
+      return createBench(formData)
+    },
+    onSuccess: () => history.push("/")
+  })
 
   const handleFileChange = e => {
     const file = e.target.files[0]
@@ -52,10 +50,15 @@ const BenchFormPage = () => {
     }
   }
 
+  if (!sessionUser || lat === "" || lng === "") return history.push("/")
+
   return (
     <div className='bench-form-page'>
       <h1>Create A Bench!</h1>
-      <form onSubmit={(e) => handleSubmit(e)}>
+
+      <form onSubmit={onSubmit}>
+        {errors.length > 0 && <FormErrors errors={errors}/>}
+
         <Input
           label="Title:"
           placeholder="Title"

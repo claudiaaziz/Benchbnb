@@ -38,7 +38,6 @@ export const createBench = benchFormData => async (dispatch) => {
       body: benchFormData,
     });
 
-
     const newBench = await res.json();
     dispatch(setBench(newBench));
     return res;
