@@ -5,6 +5,7 @@ import "./BenchFormPage.css"
 import { createBench } from '../../store/benches';
 import { useInput, useSubmit } from '../../hooks';
 import { FormErrors, Input, TextArea } from '../formElements';
+import SessionModal from '../SessionForms';
 
 const BenchFormPage = () => {
   const history = useHistory()
@@ -50,74 +51,78 @@ const BenchFormPage = () => {
     }
   }
 
-  if (!sessionUser || lat === "" || lng === "") return history.push("/")
+  if (lat === "" || lng === "") return history.push("/")
+  // if (!sessionUser) history.push("/")
 
   return (
-    <div className='bench-form-page'>
-      <h1>Create A Bench!</h1>
+    <>
+      <div className='bench-form-page'>
+        <h1>Create A Bench!</h1>
 
-      <form onSubmit={onSubmit}>
-        <FormErrors errors={errors} />
+        <form onSubmit={onSubmit}>
+          <FormErrors errors={errors} />
 
-        <Input
-          label="Title:"
-          placeholder="Title"
-          value={title}
-          onChange={onTitleChange}
-          required
-          autoFocus
-        />
-        <Input
-          label="Price:"
-          type='number'
-          min="10"
-          max="1000"
-          value={price}
-          onChange={onPriceChange}
-          required
-        />
-        <TextArea
-          label="Description:"
-          cols="50"
-          rows="8"
-          value={description}
-          onChange={onDescriptionChange}
-          required
-        />
-        <Input
-          label="Seating:"
-          type='number'
-          min="0"
-          value={seating}
-          onChange={onSeatingChange}
-          required
-        />
-        <Input
-          label="Lat:"
-          type='number'
-          value={lat}
-          disabled
-        />
-        <Input
-          label="Lng:"
-          type='number'
-          value={lng}
-          disabled
-        />
-        <Input
-          label="Add a Picture"
-          type='file'
-          onChange={handleFileChange}
-        />
-        {photoUrl && 
-          <div className='image-preview'>
-            <h3>Image preview</h3>
-            <img src={photoUrl} alt='bench' />
-          </div>
-        }
-        <button type="submit">Create Bench</button>
-      </form>
-    </div>
+          <Input
+            label="Title:"
+            placeholder="Title"
+            value={title}
+            onChange={onTitleChange}
+            required
+            autoFocus
+          />
+          <Input
+            label="Price:"
+            type='number'
+            min="10"
+            max="1000"
+            value={price}
+            onChange={onPriceChange}
+            required
+          />
+          <TextArea
+            label="Description:"
+            cols="50"
+            rows="8"
+            value={description}
+            onChange={onDescriptionChange}
+            required
+          />
+          <Input
+            label="Seating:"
+            type='number'
+            min="0"
+            value={seating}
+            onChange={onSeatingChange}
+            required
+          />
+          <Input
+            label="Lat:"
+            type='number'
+            value={lat}
+            disabled
+          />
+          <Input
+            label="Lng:"
+            type='number'
+            value={lng}
+            disabled
+          />
+          <Input
+            label="Add a Picture"
+            type='file'
+            onChange={handleFileChange}
+          />
+          {photoUrl && 
+            <div className='image-preview'>
+              <h3>Image preview</h3>
+              <img src={photoUrl} alt='bench' />
+            </div>
+          }
+          <button type="submit">Create Bench</button>
+        </form>
+      </div>
+      {/* {!sessionUser && <SessionModal />} */}
+    </>
   )
 }
 

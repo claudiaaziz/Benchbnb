@@ -3,12 +3,13 @@ import { useInput, useSubmit } from "../../hooks";
 import { FormErrors, Input } from "../formElements";
 import { login } from "../../store/session";
 
-const LoginForm = () => {
+const LoginForm = ({ setShowModal }) => {
   const [credential, onCredentialChange] = useInput("");
   const [password, onPasswordChange] = useInput("");
 
   const [errors, onSubmit] = useSubmit({
-    action: login({ credential, password })
+    action: login({ credential, password }),
+    onSuccess: () => setShowModal(false)
   });
 
   return (

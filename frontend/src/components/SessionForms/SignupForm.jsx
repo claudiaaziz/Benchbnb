@@ -5,7 +5,7 @@ import { useInput, useSubmit } from "../../hooks";
 import { FormErrors, Input } from "../formElements";
 import { signup } from "../../store/session";
 
-const SignupForm = () => {
+const SignupForm = ({ setShowModal }) => {
   const sessionUser = useSelector(state => state.session.user);
   const [email, onEmailChange] = useInput("");
   const [username, onUsernameChange] = useInput("");
@@ -18,7 +18,8 @@ const SignupForm = () => {
       if (password !== confirmPassword) {
         return ['Confirm Password field must be the same as the Password field'];
       }
-    }
+    },
+    onSuccess: () => setShowModal(false)
   });
 
   if (sessionUser) return <Redirect to="/" />;
