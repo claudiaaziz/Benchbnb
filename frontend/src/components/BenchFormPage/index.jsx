@@ -57,7 +57,7 @@ const BenchFormPage = () => {
       <h1>Create A Bench!</h1>
 
       <form onSubmit={onSubmit}>
-        {errors.length > 0 && <FormErrors errors={errors}/>}
+        <FormErrors errors={errors} />
 
         <Input
           label="Title:"
@@ -69,7 +69,6 @@ const BenchFormPage = () => {
         />
         <Input
           label="Price:"
-          placeholder="Price"
           type='number'
           min="10"
           max="1000"
@@ -79,7 +78,6 @@ const BenchFormPage = () => {
         />
         <TextArea
           label="Description:"
-          placeholder="Description"
           cols="50"
           rows="8"
           value={description}
@@ -90,7 +88,6 @@ const BenchFormPage = () => {
           label="Seating:"
           type='number'
           min="0"
-          placeholder="Seating"
           value={seating}
           onChange={onSeatingChange}
           required
@@ -98,14 +95,12 @@ const BenchFormPage = () => {
         <Input
           label="Lat:"
           type='number'
-          placeholder="Lat"
           value={lat}
           disabled
         />
         <Input
           label="Lng:"
           type='number'
-          placeholder="Lng"
           value={lng}
           disabled
         />

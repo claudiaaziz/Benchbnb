@@ -18,6 +18,7 @@ export const TextArea = ({ label, ...inputProps }) => {
 
 export const FormErrors = ({ errors }) => {
   return (
+    errors.length > 0 &&
     <ul className="errors">
       {errors.map(error => <li key={error}>{error}</li>)}
     </ul>

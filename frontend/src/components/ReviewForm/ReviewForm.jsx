@@ -19,7 +19,7 @@ const ReviewForm = ({ benchId, closeModal }) => {
 
   return (
     <form onSubmit={onSubmit} className="review-form">
-      {errors.length > 0 && <FormErrors errors={errors}/>}
+      <FormErrors errors={errors} />
         <Input
           label="Rate this bench:"
           type='number'

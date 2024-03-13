@@ -25,7 +25,7 @@ const SignupFormPage = () => {
 
   return (
     <form onSubmit={onSubmit}>
-      {errors.length > 0 && <FormErrors errors={errors}/>}
+      <FormErrors errors={errors} />
 
       <Input
         label="Email:"

@@ -13,7 +13,7 @@ const LoginForm = () => {
 
   return (
     <form onSubmit={onSubmit} className="login-form"> 
-      {errors.length > 0 && <FormErrors errors={errors}/>}
+      <FormErrors errors={errors} />
 
       <Input
         label="Username or Email:"
