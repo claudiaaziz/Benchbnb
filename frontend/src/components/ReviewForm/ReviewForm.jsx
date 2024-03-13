@@ -1,15 +1,19 @@
-import { useInput, useSubmit } from "../../hooks";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useInput } from "../../hooks";
 import { FormErrors, Input, TextArea } from "../Forms";
 import "./ReviewForm.css"
 import { createReview, fetchBench } from "../../store/benches";
 
 const ReviewForm = ({ benchId, onClose }) => {
+  const dispatch = useDispatch();
   const [rating, onRatingChange] = useInput(5);
-  const [comment, onCommentChange] = useInput("");
+  const [description, onDescriptionChange] = useInput("");
+  const [errors, setErrors] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const review = { rating, body: comment, benchId }
+    const review = { rating, body: description, benchId }
     const res = await dispatch(createReview(review))
 
     if (res.message) {
@@ -21,33 +25,25 @@ const ReviewForm = ({ benchId, onClose }) => {
     }
   };
 
-  // const [errors, onSubmit] = useSubmit({
-  //   createAction: () => {
-  //     const review = { rating, body: comment, benchId }
-  //     return createReview(review)
-  //   },
-  //   onSuccess: () => console.log("successss yay")
-  // })
-
   return (
-    <form onSubmit={onSubmit} className="review-form">
+    <form onSubmit={handleSubmit} className="review-form">
       {errors.length > 0 && <FormErrors errors={errors}/>}
-
         <Input
           label="Rate this bench:"
           type='number'
-          min="0"
+          min="1"
           max="5"
           value={rating}
           onChange={onRatingChange}
           required
         />
         <TextArea
-          label="Comment:"
+          label="Description:"
+          placeholder="Description"
           cols="30"
           rows="10"
-          value={comment}
-          onChange={onCommentChange}
+          value={description}
+          onChange={onDescriptionChange}
           required
         />
       <button type="submit">Submit Review</button>
