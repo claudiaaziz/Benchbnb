@@ -15,6 +15,7 @@ const BenchIndexPage = () => {
   const [bounds, setBounds] = useState(null);
   const [minSeating, onMinSeatingChange] = useInput(1);
   const [maxSeating, onMaxSeatingChange] = useInput(10);
+  const [highlightedBench, setHighlightedBench] = useState(null)
 
   useEffect(() => {
     if (minSeating && maxSeating && bounds) {
@@ -22,7 +23,11 @@ const BenchIndexPage = () => {
     }
   }, [minSeating, maxSeating, bounds, dispatch])
 
-  const markerEventHandlers = { click: (bench) => history.push(`/benches/${bench.id}`) } // navigates to that bench's show
+  const markerEventHandlers = {
+    click: (bench) => history.push(`/benches/${bench.id}`),
+    mouseover: (bench) => setHighlightedBench(bench.id),
+    mouseout: () => setHighlightedBench(null)
+  } 
 
   const mapEventHandlers = {
     click: (event) => { // on click push to new bench form w a query string containing the selected lat & lng
@@ -35,7 +40,7 @@ const BenchIndexPage = () => {
 
   return (
     <div className='bench-index-page'>
-      <BenchMapWrapper benches={benches} markerEventHandlers={markerEventHandlers} mapEventHandlers={mapEventHandlers} from={"index"} />
+      <BenchMapWrapper benches={benches} markerEventHandlers={markerEventHandlers} mapEventHandlers={mapEventHandlers} from={"index"} highlightedBench={highlightedBench} />
       <FilterForm minSeating={minSeating} onMinSeatingChange={onMinSeatingChange} maxSeating={maxSeating} onMaxSeatingChange={onMaxSeatingChange} />
       {benches && <BenchList benches={benches} />}
     </div>

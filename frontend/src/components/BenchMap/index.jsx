@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { Wrapper } from '@googlemaps/react-wrapper';
 
-const BenchMap = ({ benches, mapOptions, markerEventHandlers, mapEventHandlers, from }) => {
+const BenchMap = ({ benches, mapOptions, markerEventHandlers, mapEventHandlers, from, highlightedBench }) => {
   const [map, setMap] = useState(null)
   const mapRef = useRef(null);
-  const markersRef = useRef({}); // bench.id: google.maps.Marker object
+  const markersRef = useRef({}); 
 
   useEffect(() => { // create the map
     if (!map) {
@@ -35,11 +35,7 @@ const BenchMap = ({ benches, mapOptions, markerEventHandlers, mapEventHandlers, 
     const createNewMarkersForEachBench = (bench) => {
       const coords = new window.google.maps.LatLng(bench.lat, bench.lng);
 
-      // Create marker
-      const marker = new window.google.maps.Marker({ 
-        map,
-        position: coords,
-        // customizations
+      const markerCustomizations = {
         label: { 
             text: `$${bench.price}`, 
             color: 'black',
@@ -60,6 +56,14 @@ const BenchMap = ({ benches, mapOptions, markerEventHandlers, mapEventHandlers, 
             labelOrigin: new window.google.maps.Point(50, 50),
             anchor: new window.google.maps.Point(50, 50)
           },
+      }
+
+      // Create marker
+      const marker = new window.google.maps.Marker({ 
+        map,
+        position: coords,
+        label: markerCustomizations.label,
+        icon: markerCustomizations.icon
         });
 
       // Apply marker event handlers
@@ -74,6 +78,21 @@ const BenchMap = ({ benches, mapOptions, markerEventHandlers, mapEventHandlers, 
 
     from === "index" ? Object.values(benches).forEach((bench) => createNewMarkersForEachBench(bench)) : createNewMarkersForEachBench(benches)
   }, [benches, map, markerEventHandlers, from]);
+
+  useEffect(() => { // change the style for bench marker on hover
+    Object.entries(markersRef.current).forEach(([benchId, marker]) => {
+      const label = marker.getLabel()
+      const icon = marker.getIcon()
+
+      if (parseInt(benchId) === highlightedBench) {
+        marker.setLabel({ ...label, color: "white" })
+        marker.setIcon({ ...icon, fillColor: "#ff385c" })
+      } else {
+        marker.setLabel({ ...label, color: "black" })
+        marker.setIcon({ ...icon, fillColor: "white" })
+      }
+    })
+  }, [markersRef, highlightedBench])
 
   return (
     <div className={`map-${from}`} ref={mapRef}></div>
