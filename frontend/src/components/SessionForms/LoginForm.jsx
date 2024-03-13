@@ -1,6 +1,6 @@
 import "./LoginForm.css";
 import { useInput, useSubmit } from "../../hooks";
-import { FormErrors, Input } from "../Forms";
+import { FormErrors, Input } from "../formElements";
 import { login } from "../../store/session";
 
 const LoginForm = () => {

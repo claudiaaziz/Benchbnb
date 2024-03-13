@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchBench } from '../../store/benches';
 import "./BenchShowPage.css"
-import ReviewFormModal from '../ReviewForm';
+import ReviewFormModal from './ReviewForm';
 import ReviewShow from './ReviewShow';
 import BenchMapWrapper from '../BenchMap';
 

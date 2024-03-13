@@ -64,18 +64,14 @@ const benchesReducer = (state = {}, action) => {
       return { ...action.payload };
     case SET_BENCH:
       return { ...state, [action.payload.bench.id]: action.payload.bench };
-    case REMOVE_REVIEW:
-      const reviewsLeft = state[action.payload.benchId].reviews.filter(
+    case REMOVE_REVIEW: {
+      const benchId = action.payload.benchId;
+      const reviewsLeft = state[benchId].reviews.filter(
         (review) => review.id !== action.payload.reviewId
       );
 
-      return {
-        ...state,
-        [action.payload.benchId]: {
-          ...state[action.payload.benchId],
-          reviews: reviewsLeft,
-        },
-      };
+      return { ...state, [benchId]: {...state[benchId], reviews: reviewsLeft } }
+    }
     default:
       return state;
   }

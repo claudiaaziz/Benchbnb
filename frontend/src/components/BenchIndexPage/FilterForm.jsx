@@ -1,4 +1,4 @@
-import { Input } from "../Forms";
+import { Input } from "../formElements";
 
 const FilterForm = ({ minSeating, onMinSeatingChange, maxSeating, onMaxSeatingChange }) => {
   return (

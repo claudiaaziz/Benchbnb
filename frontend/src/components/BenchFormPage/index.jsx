@@ -4,7 +4,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import "./BenchFormPage.css"
 import { createBench } from '../../store/benches';
 import { useInput, useSubmit } from '../../hooks';
-import { FormErrors, Input, TextArea } from '../Forms';
+import { FormErrors, Input, TextArea } from '../formElements';
 
 const BenchFormPage = () => {
   const history = useHistory()

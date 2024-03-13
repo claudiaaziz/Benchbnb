@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux";
-import { useInput, useSubmit } from "../../hooks";
-import { FormErrors, Input, TextArea } from "../Forms";
+import { useInput, useSubmit } from "../../../hooks";
+import { FormErrors, Input, TextArea } from "../../formElements";
 import "./ReviewForm.css"
-import { createReview, fetchBench } from "../../store/benches";
+import { createReview, fetchBench } from "../../../store/benches";
 
 const ReviewForm = ({ benchId, closeModal }) => {
   const dispatch = useDispatch();

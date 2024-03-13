@@ -2,10 +2,10 @@ import "./SignupForm.css"
 import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { useInput, useSubmit } from "../../hooks";
-import { FormErrors, Input } from "../Forms";
+import { FormErrors, Input } from "../formElements";
 import { signup } from "../../store/session";
 
-const SignupFormPage = () => {
+const SignupForm = () => {
   const sessionUser = useSelector(state => state.session.user);
   const [email, onEmailChange] = useInput("");
   const [username, onUsernameChange] = useInput("");
@@ -63,4 +63,4 @@ const SignupFormPage = () => {
   );
 }
 
-export default SignupFormPage;
+export default SignupForm;
