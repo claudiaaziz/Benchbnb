@@ -21,7 +21,7 @@ const BenchShowPage = () => {
 
   const mapOptions = { center: { lat: bench?.lat, lng: bench?.lng } }
 
-  if (!bench) return
+  if (!bench) return // or render page not found page
 
   return (
     <div className='bench-show-page'>

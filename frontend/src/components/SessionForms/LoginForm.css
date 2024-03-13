@@ -18,3 +18,8 @@
   background-color: #ff385c;
   color: white;
 }
+
+.fake-link {
+  text-decoration: underline;
+  cursor: pointer;
+}

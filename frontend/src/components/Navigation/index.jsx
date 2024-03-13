@@ -25,7 +25,7 @@ const Navigation = () => {
           setType("signup")
         }}>Sign Up</button>
 
-        <SessionModal showModal={showModal} setShowModal={setShowModal} type={type}/>
+        <SessionModal showModal={showModal} setShowModal={setShowModal} type={type} setType={setType}/>
       </>
     )
   }

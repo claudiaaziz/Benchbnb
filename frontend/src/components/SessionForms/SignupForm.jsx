@@ -5,7 +5,7 @@ import { useInput, useSubmit } from "../../hooks";
 import { FormErrors, Input } from "../formElements";
 import { signup } from "../../store/session";
 
-const SignupForm = ({ setShowModal }) => {
+const SignupForm = ({ setShowModal, setType }) => {
   const sessionUser = useSelector(state => state.session.user);
   const [email, onEmailChange] = useInput("");
   const [username, onUsernameChange] = useInput("");
@@ -60,6 +60,7 @@ const SignupForm = ({ setShowModal }) => {
         required
       />
       <button type="submit">Sign Up</button>
+      <span className="fake-link" onClick={() => setType("login")}>Login instead</span>
     </form>
   );
 }

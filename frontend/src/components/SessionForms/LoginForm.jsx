@@ -3,7 +3,7 @@ import { useInput, useSubmit } from "../../hooks";
 import { FormErrors, Input } from "../formElements";
 import { login } from "../../store/session";
 
-const LoginForm = ({ setShowModal }) => {
+const LoginForm = ({ setShowModal, setType }) => {
   const [credential, onCredentialChange] = useInput("");
   const [password, onPasswordChange] = useInput("");
 
@@ -33,6 +33,7 @@ const LoginForm = ({ setShowModal }) => {
         required
       />
       <button type="submit">Log In</button>
+      <span className="fake-link" onClick={() => setType("signup")}>Sign up instead</span>
     </form>
   );
 }
