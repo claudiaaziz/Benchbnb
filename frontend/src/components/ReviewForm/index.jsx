@@ -11,7 +11,7 @@ const ReviewFormModal = ({ benchId }) => {
       <button onClick={() => setShowModal(true)}>Leave a review of this bench!</button>
       {showModal && (
         <Modal onClose={closeModal}>
-          <ReviewForm onClose={closeModal} benchId={benchId}/>
+          <ReviewForm closeModal={closeModal} benchId={benchId}/>
         </Modal>
       )}
     </>

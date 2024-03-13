@@ -43,25 +43,11 @@ export const createBench = benchFormData => async (dispatch) => {
     return res;
 };
 
-export const createReview = (reviewData) => async (dispatch) => {
-  try {
-    const res = await csrfFetch("/api/reviews", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(reviewData),
-    });
-
-    if (!res.ok) throw res;
-
-    const responseFromController = await res.json();
-    return responseFromController;
-  } catch (error) {
-    const validationErrors = await error.json();
-    console.error("Error creating review:", error);
-    return validationErrors;
-  }
+export const createReview = (reviewData) => async (dispatch) => { // for now this works bc if res.ok dispatch fetch bench in useSubmit
+  await csrfFetch("/api/reviews", {
+    method: "POST",
+    body: JSON.stringify(reviewData)
+  });
 };
 
 export const deleteReview = (reviewId, benchId) => async (dispatch) => {
