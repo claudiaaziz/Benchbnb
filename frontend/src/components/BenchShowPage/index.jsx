@@ -39,7 +39,7 @@ const BenchShowPage = () => {
         </div>
         {!isUserReviewed && sessionUser && <ReviewFormModal benchId={benchId} />}
         <h2>Reviews</h2>
-        {reviews?.length > 0 && <h3>Average rating: {bench.avgRating}</h3>}
+        {reviews?.length > 0 && <h3>Average Rating: {bench.avgRating}</h3>}
         {reviews?.length > 0 ? reviews.map(review => <ReviewShow review={review} benchId={benchId} key={review.id} />) : "No reviews have been posted for this bench yet."}
       </div>
     </div>
