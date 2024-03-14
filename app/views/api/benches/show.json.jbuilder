@@ -1,5 +1,5 @@
 json.bench do 
-  json.extract! @bench, :id, :title, :description, :price, :seating, :lat, :lng
+  json.extract! @bench, :id, :title, :description, :price, :seating, :lat, :lng, :avg_rating
 
   json.photo_url url_for(@bench.photo) if @bench.photo.attached?
 
