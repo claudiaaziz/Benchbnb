@@ -1,9 +1,9 @@
 .nav {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: .3% 5%;
   height: 7vh;
+  justify-content: space-between;
   box-sizing: border-box;
 }
 
@@ -22,25 +22,35 @@
 } */
 
 .profile-button {
-  color: #ff385c;
-  font-size: 24px;
-  background-color: transparent;
+  background-color: white;
   position: relative;
+  height: 40px;
+  width: 70px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid lightgray;
+}
+
+.profile-button svg {
+  fill: gray;
+  height: 30px;
+  width: 30px;
 }
 
 .profile-dropdown {
+  width: 200px;
   position: absolute;
-  top: 5%;
-  right: 4%;
+  top: 6%;
+  right: 5%;
   border-radius: 10px;
   z-index: 1;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .profile-dropdown button {
   background-color: transparent;
-  color: #ff385c;
-}
-
-.profile-dropdown li {
-  /* margin-bottom: 5px; */
+  color: black;
 }
