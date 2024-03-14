@@ -2,6 +2,7 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import { thunk } from "redux-thunk";
 import session from "./session";
 import benches from "./benches";
+import modal from "./modal";
 
 let enhancer;
 
@@ -17,6 +18,7 @@ if (process.env.NODE_ENV === "production") {
 const rootReducer = combineReducers({
   session,
   benches,
+  modal
 });
 
 const configureStore = (preloadedState) => {

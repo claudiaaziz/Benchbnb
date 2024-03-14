@@ -1,21 +1,48 @@
-import React, { useState } from 'react';
-import { Modal } from '../../../context/Modal';
-import ReviewForm from './ReviewForm';
+import { useDispatch, useSelector } from "react-redux";
+import { useInput, useSubmit } from "../../../hooks";
+import { FormErrors, Input, TextArea } from "../../formElements";
+import "./ReviewForm.css"
+import { createReview, fetchBench } from "../../../store/benches";
+import { closeModal } from "../../../store/modal";
 
-const ReviewFormModal = ({ benchId }) => {
-  const [showModal, setShowModal] = useState(false);
-  const closeModal = () => setShowModal(false)
+const ReviewForm = () => {
+  const dispatch = useDispatch();
+  const bench = useSelector(state => state?.modal?.props.bench)
+  const [rating, onRatingChange] = useInput(5);
+  const [comment, onCommentChange] = useInput("");
+
+  const [errors, onSubmit] = useSubmit({
+    action: createReview( { rating, body: comment, benchId: bench?.id }),
+    onSuccess: () => {
+      dispatch(closeModal())
+      dispatch(fetchBench(bench.id))
+    }
+  })
 
   return (
-    <>
-      <button onClick={() => setShowModal(true)}>Leave a review of this bench!</button>
-      {showModal && (
-        <Modal onClose={closeModal}>
-          <ReviewForm closeModal={closeModal} benchId={benchId}/>
-        </Modal>
-      )}
-    </>
-  );
+    <form onSubmit={onSubmit} className="review-form">
+      <h1>Review {bench?.title}</h1>
+      <FormErrors errors={errors} />
+        <Input
+          label="Rate this bench:"
+          type='number'
+          min="1"
+          max="5"
+          value={rating}
+          onChange={onRatingChange}
+          required
+        />
+        <TextArea
+          label="Comment:"
+          cols="30"
+          rows="10"
+          value={comment}
+          onChange={onCommentChange}
+          required
+        />
+      <button type="submit">Submit Review</button>
+    </form>
+  )
 }
 
-export default ReviewFormModal;
+export default ReviewForm

@@ -4,6 +4,7 @@ import Navigation from "./components/Navigation";
 import BenchIndexPage from "./components/BenchIndexPage";
 import BenchShowPage from "./components/BenchShowPage";
 import BenchFormPage from "./components/BenchFormPage";
+import Modal from "./components/Modal";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
           <BenchShowPage />
         </Route>
       </Switch>
+      <Modal />
     </>
   );
 }

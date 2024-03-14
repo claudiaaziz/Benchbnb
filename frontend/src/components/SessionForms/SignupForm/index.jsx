@@ -1,11 +1,13 @@
 import "./SignupForm.css"
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { useInput, useSubmit } from "../../hooks";
-import { FormErrors, Input } from "../formElements";
-import { signup } from "../../store/session";
+import { useInput, useSubmit } from "../../../hooks";
+import { FormErrors, Input } from "../../formElements";
+import { signup } from "../../../store/session";
+import { closeModal, openModal } from "../../../store/modal";
 
-const SignupForm = ({ setShowModal, setType }) => {
+const SignupForm = () => {
+  const dispatch = useDispatch()
   const sessionUser = useSelector(state => state.session.user);
   const [email, onEmailChange] = useInput("");
   const [username, onUsernameChange] = useInput("");
@@ -19,13 +21,14 @@ const SignupForm = ({ setShowModal, setType }) => {
         return ['Confirm Password field must be the same as the Password field'];
       }
     },
-    onSuccess: () => setShowModal(false)
+    onSuccess: () => dispatch(closeModal())
   });
 
   if (sessionUser) return <Redirect to="/" />;
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} className="signup-form">
+      <h1>Signup</h1>
       <FormErrors errors={errors} />
 
       <Input
@@ -60,7 +63,7 @@ const SignupForm = ({ setShowModal, setType }) => {
         required
       />
       <button type="submit">Sign Up</button>
-      <span className="fake-link" onClick={() => setType("login")}>Login instead</span>
+      <span className="fake-link" onClick={() => dispatch(openModal("login"))}>Login instead</span>
     </form>
   );
 }
