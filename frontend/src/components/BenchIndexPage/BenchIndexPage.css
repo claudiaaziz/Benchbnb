@@ -4,7 +4,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* border: 1px solid green; */
 }
 
 .map-index {
@@ -32,7 +31,7 @@
 
 .bench-list-item {
   cursor: pointer;
-  border: 1px solid black;
+  border: 2px solid black;
   min-height: 150px;
   width: 70%;
   display: flex;
@@ -42,3 +41,6 @@
   border-radius: 18px;
 }
 
+.bench-list-item-highlighted {
+  border: 2px solid #ff385c;
+}

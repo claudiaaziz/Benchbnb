@@ -84,7 +84,7 @@ const BenchMap = ({ benches, mapOptions, markerEventHandlers, mapEventHandlers, 
       const label = marker.getLabel()
       const icon = marker.getIcon()
 
-      if (parseInt(benchId) === highlightedBench) {
+      if (Number(benchId) === highlightedBench) {
         marker.setLabel({ ...label, color: "white" })
         marker.setIcon({ ...icon, fillColor: "#ff385c" })
       } else {
