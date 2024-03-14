@@ -1,25 +1,27 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useInput, useSubmit } from "../../../hooks";
 import { FormErrors, Input, TextArea } from "../../formElements";
 import "./ReviewForm.css"
 import { createReview, fetchBench } from "../../../store/benches";
+import { closeModal } from "../../../store/modal";
 
-const ReviewForm = ({ benchId, closeModal }) => {
-  console.log("hello why can ti see myself")
+const ReviewForm = () => {
   const dispatch = useDispatch();
+  const bench = useSelector(state => state?.modal?.props.bench)
   const [rating, onRatingChange] = useInput(5);
   const [comment, onCommentChange] = useInput("");
 
   const [errors, onSubmit] = useSubmit({
-    action: createReview( { rating, body: comment, benchId }),
+    action: createReview( { rating, body: comment, benchId: bench?.id }),
     onSuccess: () => {
-      closeModal()
-      dispatch(fetchBench(benchId))
+      dispatch(closeModal())
+      dispatch(fetchBench(bench.id))
     }
   })
 
   return (
     <form onSubmit={onSubmit} className="review-form">
+      <h1>Review {bench?.title}</h1>
       <FormErrors errors={errors} />
         <Input
           label="Rate this bench:"

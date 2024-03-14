@@ -3,18 +3,19 @@ import { closeModal } from "../../store/modal";
 import ReviewForm from "../BenchShowPage/ReviewForm";
 import SignupForm from "../SessionForms/SignupForm";
 import LoginForm from "../SessionForms/LoginForm";
+import "./Modal.css"
 
 
 const Modal = () => {
   const dispatch = useDispatch()
-  const modal = useSelector(state => state.modal?.modal)
+  const modalTitle = useSelector(state => state.modal.modalTitle)
 
-  if (!modal) return null;
+  if (!modalTitle) return null;
 
   let component;
   let modalClass;
 
-  switch (modal) {
+  switch (modalTitle) {
     case "login":
       component = <LoginForm />;
       modalClass = "login-modal";

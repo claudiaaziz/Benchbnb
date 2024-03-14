@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchBench } from '../../store/benches';
 import "./BenchShowPage.css"
-import ReviewFormModal from './ReviewForm';
 import ReviewShow from './ReviewShow';
 import BenchMapWrapper from '../BenchMap';
 import { openModal } from '../../store/modal';
@@ -37,7 +36,7 @@ const BenchShowPage = () => {
             <li>Lat: {bench.lat}</li>
             <li>Long: {bench.lng}</li>
           </ul>
-        {!isUserReviewed && sessionUser && <button onClick={() => dispatch(openModal("ReviewForm"))}>Leave a review of this bench!</button>}
+        {!isUserReviewed && sessionUser && <button onClick={() => dispatch(openModal("ReviewForm", {bench}))}>Leave a review of this bench!</button>}
         </div>
         <h2>Reviews</h2>
         {reviews?.length > 0 && <h3>Average Rating: {bench.avgRating}</h3>}
