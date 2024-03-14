@@ -17,25 +17,27 @@ const LoginForm = () => {
 
   return (
     <form onSubmit={onSubmit} className="login-form"> 
-      <h1>Login</h1>
+      <h1>Log In</h1>
       <FormErrors errors={errors} />
 
-      <Input
-        label="Username or Email:"
-        placeholder="Username or Email"
-        value={credential}
-        onChange={onCredentialChange}
-        required
-        autoFocus
-      />
-      <Input
-        label="Password:"
-        placeholder="Password"
-        type="password"
-        value={password}
-        onChange={onPasswordChange}
-        required
-      />
+      <div className="input-div">
+        <Input
+          label="Username or Email:"
+          placeholder="Username or Email"
+          value={credential}
+          onChange={onCredentialChange}
+          required
+          autoFocus
+        />
+        <Input
+          label="Password:"
+          placeholder="Password"
+          type="password"
+          value={password}
+          onChange={onPasswordChange}
+          required
+        />
+      </div>
       <button type="submit">Log In</button>
       <span className="fake-link" onClick={() => dispatch(openModal("signup"))}>Sign up instead</span>
     </form>

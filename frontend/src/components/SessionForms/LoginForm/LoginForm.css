@@ -5,30 +5,18 @@
   transform: translate(-50%, -50%);
   height: 40vh;
   width: 40vh;
-  background-color: white;
 }
 
 .login-form {
   width: 100%;
   height: 100%;
+  background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 30px;
   padding: 10px;
+  border-radius: 15px;
 }
 
-.login-form button {
-  width: 70%;
-  height: 7%;
-  border-radius: 5px;
-  align-self: center;
-  background-color: #ff385c;
-  color: white;
-}
-
-.fake-link {
-  text-decoration: underline;
-  cursor: pointer;
-}
