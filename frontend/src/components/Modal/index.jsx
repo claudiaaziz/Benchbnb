@@ -5,7 +5,6 @@ import SignupForm from "../SessionForms/SignupForm";
 import LoginForm from "../SessionForms/LoginForm";
 import "./Modal.css"
 
-
 const Modal = () => {
   const dispatch = useDispatch()
   const modalTitle = useSelector(state => state.modal.modalTitle)
@@ -26,7 +25,6 @@ const Modal = () => {
       break;
     case "ReviewForm":
       component = <ReviewForm />;
-      // <ReviewFormModal benchId={benchId} />}
       modalClass = "review-form-modal";
       break;
     default:

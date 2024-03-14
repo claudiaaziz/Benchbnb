@@ -1,19 +1,23 @@
 import "./LoginForm.css";
-import { useInput, useSubmit } from "../../hooks";
-import { FormErrors, Input } from "../formElements";
-import { login } from "../../store/session";
+import { useInput, useSubmit } from "../../../hooks";
+import { FormErrors, Input } from "../../formElements";
+import { login } from "../../../store/session";
+import { useDispatch } from "react-redux";
+import { closeModal, openModal } from "../../../store/modal";
 
-const LoginForm = ({ setShowModal, setType }) => {
+const LoginForm = () => {
+  const dispatch = useDispatch()
   const [credential, onCredentialChange] = useInput("");
   const [password, onPasswordChange] = useInput("");
 
   const [errors, onSubmit] = useSubmit({
     action: login({ credential, password }),
-    onSuccess: () => setShowModal(false)
+    onSuccess: () => dispatch(closeModal())
   });
 
   return (
     <form onSubmit={onSubmit} className="login-form"> 
+      <h1>Login</h1>
       <FormErrors errors={errors} />
 
       <Input
@@ -33,7 +37,7 @@ const LoginForm = ({ setShowModal, setType }) => {
         required
       />
       <button type="submit">Log In</button>
-      <span className="fake-link" onClick={() => setType("signup")}>Sign up instead</span>
+      <span className="fake-link" onClick={() => dispatch(openModal("signup"))}>Sign up instead</span>
     </form>
   );
 }

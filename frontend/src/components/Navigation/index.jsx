@@ -1,14 +1,12 @@
-// import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
-// import SessionModal from '../SessionForms';
 import './Navigation.css';
+import { openModal } from '../../store/modal';
 
 const Navigation = () => {
+  const dispatch = useDispatch()
   const sessionUser = useSelector(state => state.session.user);
-  // const [showModal, setShowModal] = useState(false);
-  // const [type, setType] = useState("signup");
 
   let sessionLinks;
   if (sessionUser) {
@@ -16,16 +14,8 @@ const Navigation = () => {
   } else {
     sessionLinks = (
       <>
-        <button onClick={() => {
-          // setShowModal(true)
-          // setType("login")
-        }}>Log In</button>
-        <button onClick={() => {
-          // setShowModal(true)
-          // setType("signup")
-        }}>Sign Up</button>
-
-        {/* <SessionModal showModal={showModal} setShowModal={setShowModal} type={type} setType={setType}/> */}
+        <button onClick={() => dispatch(openModal("login"))}>Log In</button>
+        <button onClick={() => dispatch(openModal("signup"))}>Sign Up</button>
       </>
     )
   }
