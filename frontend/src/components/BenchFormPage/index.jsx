@@ -60,7 +60,7 @@ const BenchFormPage = () => {
 
   return (
     <div className='bench-form-page'>
-      <h1>Create A Bench!</h1>
+      <h1>Benchbnb your bench</h1>
 
       <form onSubmit={onSubmit}>
         <FormErrors errors={errors} />
@@ -114,6 +114,7 @@ const BenchFormPage = () => {
           label="Add a Picture"
           type='file'
           onChange={handleFileChange}
+          className="default-styling"
         />
         {photoUrl && 
           <div className='image-preview'>

@@ -1,27 +1,43 @@
 .bench-form-page {
-  background-color: palevioletred;
-  width: 100vw;
-  height: 100vh;
   display: flex;
+  flex-direction: column;
+  height: 93vh;
+  width: 100vw;
   justify-content: center;
   align-items: center;
+  gap: 50px;
+}
+
+.bench-form-page h1 {
+  font-size: 2rem;
 }
 
 .bench-form-page form {
-  padding: 5%;
-  width: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 15px;
+  gap: 20px;
+  background-color: aliceblue;
+  height: 80%;
+  width: 50%;
 }
 
-.bench-form-page label {
-  width: 100px;
-  margin-bottom: 5px;
+.bench-form-page input {
+  margin-left: 10px;
+  width: 250px;
+  height: 30px;
+  padding: 5px;
 }
 
-.bench-form-page .image-preview img {
-  height: 50px;
+.bench-form-page textarea {
+  margin-left: 10px;
+}
+
+.bench-form-page button {
+  width: 70%;
+}
+
+.default-styling {
+  border: none;
 }

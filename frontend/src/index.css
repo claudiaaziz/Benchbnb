@@ -36,6 +36,10 @@ button {
   padding: 10px;
 }
 
+input, textarea {
+  border: 1px solid lightgray;
+}
+
 .fake-link {
   text-decoration: underline;
   cursor: pointer;
