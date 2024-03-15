@@ -1,9 +1,9 @@
-import "./LoginForm.css";
-import { useInput, useSubmit } from "../../../hooks";
-import { FormErrors, Input } from "../../formElements";
-import { login } from "../../../store/session";
+import "./SessionForms.css";
+import { useInput, useSubmit } from "../../hooks";
+import { FormErrors, Input } from "../formElements";
+import { login } from "../../store/session";
 import { useDispatch } from "react-redux";
-import { closeModal, openModal } from "../../../store/modal";
+import { closeModal, openModal } from "../../store/modal";
 
 const LoginForm = () => {
   const dispatch = useDispatch()

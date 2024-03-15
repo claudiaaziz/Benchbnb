@@ -1,10 +1,10 @@
-import "./SignupForm.css"
+import "./SessionForms.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { useInput, useSubmit } from "../../../hooks";
-import { FormErrors, Input } from "../../formElements";
-import { signup } from "../../../store/session";
-import { closeModal, openModal } from "../../../store/modal";
+import { useInput, useSubmit } from "../../hooks";
+import { FormErrors, Input } from "../formElements";
+import { signup } from "../../store/session";
+import { closeModal, openModal } from "../../store/modal";
 
 const SignupForm = () => {
   const dispatch = useDispatch()
