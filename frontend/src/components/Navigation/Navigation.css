@@ -28,9 +28,17 @@
   width: 70px;
   border-radius: 20px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   border: 1px solid lightgray;
+}
+
+.profile-button:hover {
+  box-shadow: 0 8px 19px -6px rgba(0, 0, 0, 0.262);
+}
+
+.profile-button .menu-icon {
+  color: gray;
 }
 
 .profile-button svg {
@@ -40,17 +48,30 @@
 }
 
 .profile-dropdown {
-  width: 200px;
+  box-sizing: border-box;
+  width: 230px;
   position: absolute;
-  top: 6%;
+  top: 7%;
   right: 5%;
   border-radius: 10px;
   z-index: 1;
   background-color: white;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 19px -6px rgba(0, 0, 0, 0.262);
 }
 
-.profile-dropdown button {
-  background-color: transparent;
+.profile-dropdown li {
+  font-size: .9rem;
   color: black;
+  cursor: pointer;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 2px 15px;
+  background-color: transparent;
+  margin-bottom: 2px;
+}
+
+.profile-dropdown li:hover {
+  background-color: rgba(211, 211, 211, 0.126);
+  border-radius: 10px;
 }
