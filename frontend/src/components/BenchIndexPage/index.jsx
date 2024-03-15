@@ -11,6 +11,8 @@ import { useInput } from '../../hooks';
 const BenchIndexPage = () => {
   const history = useHistory();
   const dispatch = useDispatch()
+  const sessionUser = useSelector(state => state?.session?.user)
+  console.log('🦋🦋🦋 ~ sessionUser:', sessionUser);
   const benches = useSelector(state => state?.benches)
   const [bounds, setBounds] = useState(null);
   const [minSeating, onMinSeatingChange] = useInput(1);
@@ -33,7 +35,9 @@ const BenchIndexPage = () => {
     click: (event) => { // on click push to new bench form w a query string containing the selected lat & lng
       const { lat, lng } = event.latLng.toJSON();
       const queryParams = new URLSearchParams({ lat, lng }).toString();
-      history.push({ pathname: '/benches/new', search: queryParams });
+      
+      console.log('🦋🦋🦋 ~ sessionUser:', sessionUser);
+      sessionUser && history.push({ pathname: '/benches/new', search: queryParams });
     },
     idle: map => setBounds(map.getBounds().toUrlValue())
   };

@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react'
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from 'react-router-dom';
 import "./BenchFormPage.css"
 import { createBench } from '../../store/benches';
 import { useInput, useSubmit } from '../../hooks';
 import { FormErrors, Input, TextArea } from '../formElements';
+import { openModal } from '../../store/modal';
 
 const BenchFormPage = () => {
+  const dispatch = useDispatch()
   const history = useHistory()
   const location = useLocation();
   
@@ -53,6 +55,8 @@ const BenchFormPage = () => {
   useEffect(() => { // for !sessionUser would be better to render signup modal
     if (!sessionUser || lat === "" || lng === "") return history.push("/")
   }, [sessionUser, lat, lng, history]) 
+
+  if (!sessionUser) dispatch(openModal("login"))
 
   return (
     <div className='bench-form-page'>

@@ -35,3 +35,7 @@ button {
   color: white;
   padding: 10px;
 }
+
+.fake-link {
+  text-decoration: underline;
+}
