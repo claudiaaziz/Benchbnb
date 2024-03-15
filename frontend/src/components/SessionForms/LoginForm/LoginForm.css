@@ -15,8 +15,29 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 30px;
   padding: 10px;
+  gap: 15px;
   border-radius: 15px;
 }
+
+.session-form hr {
+  width: 100%;
+  border: .5px solid lightgrey;
+}
+
+.session-form h1, .session-form h2 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.session-form input {
+  width: 250px;
+  height: 30px;
+  padding: 5px;
+}
+
+.session-form button {
+  width: 70%;
+}
+
 

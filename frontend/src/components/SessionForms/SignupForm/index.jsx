@@ -27,27 +27,26 @@ const SignupForm = () => {
   if (sessionUser) return <Redirect to="/" />;
 
   return (
-    <form onSubmit={onSubmit} className="signup-form">
+    <form onSubmit={onSubmit} className="signup-form session-form">
       <h1>Signup</h1>
+      <hr />
+      <h2>Welcome to Airbnb</h2>
+
       <FormErrors errors={errors} />
 
       <Input
-        label="Email:"
         placeholder="Email"
         value={email}
         onChange={onEmailChange}
         required
-        autoFocus
       />
       <Input
-        label="Username:"
         placeholder="Username"
         value={username}
         onChange={onUsernameChange}
         required
       />
       <Input
-        label="Password:"
         placeholder="Password"
         type="password"
         value={password}
@@ -55,7 +54,6 @@ const SignupForm = () => {
         required
       />
       <Input
-        label="Confirm Password:"
         placeholder="Confirm Password"
         type="password"
         value={confirmPassword}

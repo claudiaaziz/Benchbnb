@@ -12,7 +12,6 @@ const BenchIndexPage = () => {
   const history = useHistory();
   const dispatch = useDispatch()
   const sessionUser = useSelector(state => state?.session?.user)
-  console.log('🦋🦋🦋 ~ sessionUser:', sessionUser);
   const benches = useSelector(state => state?.benches)
   const [bounds, setBounds] = useState(null);
   const [minSeating, onMinSeatingChange] = useInput(1);
