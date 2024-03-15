@@ -7,9 +7,18 @@
   box-sizing: border-box;
 }
 
+.nav svg {
+  fill: #ff385c;
+  height: 35px;
+  width: 35px;
+  margin-right: 2px;
+}
+
 .logo {
   color: #ff385c;
-  font-size: 2.5rem;
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
 }
 
 .nav button {
