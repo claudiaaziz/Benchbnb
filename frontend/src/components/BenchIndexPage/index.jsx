@@ -44,8 +44,10 @@ const BenchIndexPage = () => {
   return (
     <div className='bench-index-page'>
       <BenchMapWrapper benches={benches} markerEventHandlers={markerEventHandlers} mapEventHandlers={mapEventHandlers} from={"index"} highlightedBench={highlightedBench} />
-      <FilterForm minSeating={minSeating} onMinSeatingChange={onMinSeatingChange} maxSeating={maxSeating} onMaxSeatingChange={onMaxSeatingChange} />
-      {benches && <BenchList benches={benches} highlightedBench={highlightedBench} setHighlightedBench={setHighlightedBench} />}
+      <div className='filter-form-and-bench-list-div'>
+        <FilterForm minSeating={minSeating} onMinSeatingChange={onMinSeatingChange} maxSeating={maxSeating} onMaxSeatingChange={onMaxSeatingChange} />
+        {benches && <BenchList benches={benches} highlightedBench={highlightedBench} setHighlightedBench={setHighlightedBench} />}
+      </div>
     </div>
   )
 }

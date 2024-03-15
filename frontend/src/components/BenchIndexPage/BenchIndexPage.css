@@ -14,9 +14,35 @@
   margin-left: 5%;
 }
 
-.bench-list-container {
-  height: 80%;
+.filter-form-and-bench-list-div {
+  height: 85%;
   width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.filter-form {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
+  width: 80%;
+}
+
+.filter-form label {
+  margin-right: 10px;
+}
+
+.filter-form input {
+  height: 30px;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  margin-left: 10px;
+}
+
+.bench-list-container {
+  height: 100%;
+  width: 100%;
   overflow-y: auto;
 }
 
