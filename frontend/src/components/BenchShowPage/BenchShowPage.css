@@ -43,7 +43,6 @@
 }
 
 .reviews-div {
-  border: 1px solid firebrick;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -63,5 +62,5 @@
 
 .delete-review {
   background-color: red;
-    width: 70%;
+  width: 70%;
 }

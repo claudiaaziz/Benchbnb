@@ -65,3 +65,7 @@ input, textarea {
 .form button {
   width: 70%;
 }
+
+.form textarea {
+  padding: 10px;
+}

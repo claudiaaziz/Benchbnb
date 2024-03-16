@@ -62,7 +62,7 @@ const BenchFormPage = () => {
     <div className='bench-form-page'>
       <h1>Benchbnb your bench</h1>
 
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className='form'>
         <FormErrors errors={errors} />
 
         <Input
@@ -84,7 +84,7 @@ const BenchFormPage = () => {
         />
         <TextArea
           label="Description:"
-          cols="50"
+          cols="30"
           rows="8"
           value={description}
           onChange={onDescriptionChange}
