@@ -27,7 +27,7 @@ const SignupForm = () => {
   if (sessionUser) return <Redirect to="/" />;
 
   return (
-    <form onSubmit={onSubmit} className="signup-form session-form">
+    <form onSubmit={onSubmit} className="signup-form form">
       <h1>Signup</h1>
       <hr />
       <h2>Welcome to Airbnb</h2>

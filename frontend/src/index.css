@@ -44,3 +44,24 @@ input, textarea {
   text-decoration: underline;
   cursor: pointer;
 }
+
+.form hr {
+  width: 100%;
+  border: .5px solid lightgrey;
+}
+
+.form h1,
+.form h2 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.form input {
+  width: 250px;
+  height: 30px;
+  padding: 5px;
+}
+
+.form button {
+  width: 70%;
+}

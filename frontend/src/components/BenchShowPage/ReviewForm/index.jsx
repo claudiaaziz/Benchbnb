@@ -20,7 +20,7 @@ const ReviewForm = () => {
   })
 
   return (
-    <form onSubmit={onSubmit} className="review-form">
+    <form onSubmit={onSubmit} className="review-form form">
       <h1>Review {bench?.title}</h1>
       <FormErrors errors={errors} />
         <Input
@@ -33,9 +33,9 @@ const ReviewForm = () => {
           required
         />
         <TextArea
-          label="Comment:"
+          placeholder="Leave a Comment..."
           cols="30"
-          rows="10"
+          rows="6"
           value={comment}
           onChange={onCommentChange}
           required

@@ -16,7 +16,7 @@ const LoginForm = () => {
   });
 
   return (
-    <form onSubmit={onSubmit} className="login-form session-form"> 
+    <form onSubmit={onSubmit} className="login-form form"> 
       <h1>Log In</h1>
       <hr />
       <h2>Welcome to Airbnb</h2>
