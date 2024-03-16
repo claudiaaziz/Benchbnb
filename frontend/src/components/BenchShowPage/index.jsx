@@ -28,19 +28,19 @@ const BenchShowPage = () => {
       <BenchMapWrapper benches={bench} mapOptions={mapOptions} from={"show"} />
       <div className='details'>
         <h1>{bench.title}</h1>
-        <div>
-          {bench.photoUrl && <img src={bench.photoUrl} alt={bench.title} />}
-          <p>{bench.description}</p>
-          <ul>
-            <li>Seating: {bench.seating}</li>
-            <li>Lat: {bench.lat}</li>
-            <li>Long: {bench.lng}</li>
-          </ul>
+        {bench.photoUrl && <img src={bench.photoUrl} alt={bench.title} />}
+        <p>{bench.description}</p>
+        <ul>
+          <li>Seating: {bench.seating}</li>
+          <li>Lat: {bench.lat}</li>
+          <li>Long: {bench.lng}</li>
+        </ul>
         {!isUserReviewed && sessionUser && <button onClick={() => dispatch(openModal("ReviewForm", {bench}))}>Leave a review of this bench!</button>}
-        </div>
+        <div className='reviews-div'>
         <h2>Reviews</h2>
         {reviews?.length > 0 && <h3>Average Rating: {bench.avgRating}</h3>}
         {reviews?.length > 0 ? reviews.map(review => <ReviewShow review={review} benchId={benchId} key={review.id} />) : "No reviews have been posted for this bench yet."}
+        </div>
       </div>
     </div>
   )

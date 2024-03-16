@@ -1,11 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
-
 ApplicationRecord.transaction do 
   puts "Destroying tables..."
   # Unnecessary if using `rails db:seed:replant`
@@ -28,65 +20,81 @@ ApplicationRecord.transaction do
   )
 
   # More users
-  10.times do 
-    User.create!({
-      username: Faker::Internet.unique.username(specifier: 3),
-      email: Faker::Internet.unique.email,
-      password: 'password'
-    }) 
-  end
+  User.create!(
+    username: 'claudia', 
+    email: 'claudiahannahh@gmail.com', 
+    password: 'asdfghjkl'
+  )
+
+  # 10.times do 
+  #   User.create!({
+  #     username: Faker::Internet.unique.username(specifier: 3),
+  #     email: Faker::Internet.unique.email,
+  #     password: 'password'
+  #   }) 
+  # end
 
 
   puts "Creating benches..."
   # Bench 1
-  Bench.create(
-    title: "City Park Bench",
-    description: "A comfortable bench in the heart of the city park.",
-    price: 50,
+  mermaid_bench = Bench.create(
+    title: "Mermaid Bench",
+    description: "A mystical spot where mermaids gather to rest and enjoy the ocean breeze.",
+    price: 1000,
     seating: 3,
-    lat: 37.75403555744388,
-    lng: -122.44549642346153
+    lat: 37.69056805123149,
+    lng: -122.31071323156357,
   )
 
+  mermaid_bench.photo.attach(io: URI.open('https://static.wikia.nocookie.net/h2o/images/6/66/Emma_Found_The_Locket.jpg/revision/latest/scale-to-width-down/250?cb=20200905151552'), filename: 'emma.png')
+    
   # Bench 2
-  Bench.create(
+  lakeside_retreat_bench = Bench.create(
     title: "Lakeside Retreat Bench",
-    description: "Enjoy the serene view by sitting on this lakeside bench.",
+    description: "A tranquil spot offering a retreat from the bustling world, right by the serene lakeshore.",
     price: 75,
     seating: 2,
     lat: 37.78008987155716,
     lng: -122.28001485352814
   )
 
+  lakeside_retreat_bench.photo.attach(io: URI.open('https://images.pexels.com/photos/5727263/pexels-photo-5727263.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'), filename: 'lakeside_retreat_bench.png')
+
   # Bench 3
-  Bench.create(
+  cozy_garden_bench = Bench.create(
     title: "Cozy Garden Bench",
-    description: "A small and cozy bench nestled in a beautiful garden.",
+    description: "A charming bench tucked away in a delightful garden, perfect for quiet contemplation and relaxation.",
     price: 30,
     seating: 2,
     lat: 37.6845125216827,
     lng: -122.4036110468394
   )
 
+  cozy_garden_bench.photo.attach(io: URI.open('https://images.pexels.com/photos/227391/pexels-photo-227391.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'), filename: 'cozy_garden_bench.png')
+
   # Bench 4
-  Bench.create(
-    title: "Mountain View Bench",
-    description: "Take in the breathtaking mountain views from this sturdy bench.",
+  cloud_bench = Bench.create(
+    title: "Cloud Bench",
+    description: "Elevated high above, this bench offers panoramic views of majestic clouds dancing in the sky.",
     price: 90,
     seating: 4,
     lat: 37.74860642003675,
     lng: -122.48188863593654
   )
 
+  cloud_bench.photo.attach(io: URI.open('https://images.pexels.com/photos/1446548/pexels-photo-1446548.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'), filename: 'cloud_bench.png')
+
   # Bench 5
-  Bench.create(
+  uae_bench = Bench.create(
     title: "Beachfront Relaxation Bench",
-    description: "Unwind by the beach on this comfortable beachfront bench.",
+    description: "Unwind by the tranquil beach, letting the gentle waves and soft sands soothe your soul on this relaxation bench.",
     price: 60,
     seating: 3,
     lat: 37.6769044817534,
     lng: -122.45579610623749
   )
+
+  uae_bench.photo.attach(io: URI.open('https://images.pexels.com/photos/8319454/pexels-photo-8319454.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'), filename: 'uae_bench.png')
 
   puts "Done!"
 end

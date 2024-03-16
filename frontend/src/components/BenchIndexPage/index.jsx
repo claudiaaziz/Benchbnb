@@ -34,8 +34,6 @@ const BenchIndexPage = () => {
     click: (event) => { // on click push to new bench form w a query string containing the selected lat & lng
       const { lat, lng } = event.latLng.toJSON();
       const queryParams = new URLSearchParams({ lat, lng }).toString();
-      
-      console.log('🦋🦋🦋 ~ sessionUser:', sessionUser);
       sessionUser && history.push({ pathname: '/benches/new', search: queryParams });
     },
     idle: map => setBounds(map.getBounds().toUrlValue())
